@@ -39,6 +39,9 @@ export interface PointLayer extends LayerBase {
   unit: string
   detailFields?: { field: string; label: string }[]
   footnoteField?: string
+  /** Domain of sizeField in source units. Radius scales with its square root so area, not radius, tracks the value. */
+  sizeDomain?: [number, number]
+  maxRadius?: number
 }
 
 export type FillLayer = ChoroplethLayer | CategoricalLayer
@@ -245,6 +248,8 @@ export const LAYERS: AtlasLayer[] = [
     geoPath: 'geo/terra/picos.geojson',
     labelField: 'nome',
     sizeField: 'ele',
+    sizeDomain: [0, 1200],
+    maxRadius: 9,
     color: '#5c3a10',
     unit: 'altitude',
     detailFields: [{ field: 'ele', label: 'Altitude (m)' }],
@@ -252,6 +257,51 @@ export const LAYERS: AtlasLayer[] = [
       oQueE: 'Pontos altos mapeados no OpenStreetMap: picos, serras e morros da Paraíba, com altitude quando o mapa registra.',
       porQueImporta: 'A Borborema é o degrau que separa o litoral úmido do Sertão seco. Ela barra a umidade que vem do mar, e por isso o Cariri, logo atrás dela, é uma das regiões mais secas do Brasil. Ver os pontos altos sobre o relevo 3D mostra esse muro.',
       comoLer: 'Círculos maiores indicam altitude maior. Muitos pontos não trazem altitude registrada e aparecem no tamanho mínimo. Os nomes surgem ao aproximar o mapa.',
+    },
+  },
+  {
+    kind: 'points',
+    id: 'agua.acudes',
+    pillar: 'agua',
+    label: 'Açudes',
+    geoPath: 'agua/acudes.geojson',
+    labelField: 'nome',
+    sizeField: 'capacidade_m3',
+    sizeDomain: [0, 744000000],
+    maxRadius: 13,
+    color: '#1e5f66',
+    unit: 'capacidade',
+    detailFields: [
+      { field: 'municipio', label: 'Município' },
+      { field: 'bacia', label: 'Bacia' },
+      { field: 'capacidade_m3', label: 'Capacidade (m³)' },
+      { field: 'percentual', label: 'Volume atual' },
+    ],
+    card: {
+      oQueE: 'Os 131 açudes que a AESA, a agência estadual de águas da Paraíba, mantém sob monitoramento. Cada ponto traz a capacidade máxima do reservatório, o município e a bacia a que pertence.',
+      porQueImporta: 'No semiárido o açude é a infraestrutura que decide se uma cidade tem água na torneira. A rocha cristalina que cobre quase todo o estado não guarda água subterrânea em quantidade, então o abastecimento do interior depende de reservatório e adutora. Coremas, Mãe d\'Água e Epitácio Pessoa concentram a maior parte da água armazenada da Paraíba.',
+      comoLer: 'Círculos maiores indicam açudes de maior capacidade. O quanto cada açude tem de água hoje não aparece aqui: a AESA publica o volume atual apenas para usuários autenticados, e a tabela pública antiga parou de ser atualizada em 2017. O mapa mostra a capacidade instalada, não o estoque.',
+    },
+  },
+  {
+    kind: 'points',
+    id: 'agua.postos_chuva',
+    pillar: 'agua',
+    label: 'Postos de chuva',
+    geoPath: 'agua/postos_chuva.geojson',
+    labelField: 'nome',
+    sizeField: null,
+    color: '#3a8f93',
+    unit: 'posto',
+    detailFields: [
+      { field: 'codigo', label: 'Código' },
+      { field: 'altitude_m', label: 'Altitude (m)' },
+      { field: 'chuva_mm', label: 'Chuva (mm)' },
+    ],
+    card: {
+      oQueE: 'A rede de pluviômetros que a AESA opera na Paraíba, herdada da antiga rede da SUDENE. São 175 postos com posição conferida, de um total de 181 cadastrados.',
+      porQueImporta: 'A chuva no semiárido é irregular no espaço: dois municípios vizinhos podem receber volumes muito diferentes no mesmo mês. A densidade de postos mostra onde existe medição em terra para checar o que os modelos de clima estimam.',
+      comoLer: 'Um ponto por posto. Seis postos cadastrados sem coordenada levantada ficam de fora. As leituras diárias exigem autenticação na AESA, então o mapa mostra onde se mede, não quanto choveu.',
     },
   },
 ]

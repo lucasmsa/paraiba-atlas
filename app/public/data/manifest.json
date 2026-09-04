@@ -114,7 +114,50 @@
       "year_note": "OSM data as of 2026-07-24T14:49:51Z",
       "rows": 343,
       "path": "geo/terra/picos.geojson"
+    },
+    "gente.homicidios": {
+      "source": "Ministério da Saúde, Sistema de Informações sobre Mortalidade (SIM), agressões X85-Y09, óbitos por residência; população estimada IBGE 2024",
+      "source_url": "http://tabnet.datasus.gov.br/cgi/tabcgi.exe?sim/cnv/ext10pb.def",
+      "year": 2024,
+      "rows": 223,
+      "path": "gente/homicidios.json"
+    },
+    "agua.acudes": {
+      "source": "AESA, SEIRA (reservatórios monitorados)",
+      "source_url": "https://seira.aesa.pb.gov.br/api/reservatorio",
+      "year": 2026,
+      "year_note": "SEIRA publishes no reference year; year is the fetch year",
+      "rows": 131,
+      "refreshed_at": "2026-09-04",
+      "with_volume": 0,
+      "volume_note": "Volume atual e histórico exigem autenticação no SEIRA; só o cadastro é público."
+    },
+    "agua.postos_chuva": {
+      "source": "AESA, SEIRA (rede pluviométrica SUDENE)",
+      "source_url": "https://seira.aesa.pb.gov.br/api/posto-sudene",
+      "year": 2026,
+      "year_note": "SEIRA publishes no reference year; year is the fetch year",
+      "rows": 175,
+      "refreshed_at": "2026-09-04",
+      "with_rain": 0,
+      "sem_coordenada": 6,
+      "fora_do_estado": 0,
+      "rain_note": "Leituras de chuva exigem autenticação no SEIRA; só o cadastro dos postos é público."
+    },
+    "gente.saude_estabelecimentos": {
+      "source": "Ministério da Saúde, CNES (atenção primária, urgência e hospitalar), julho de 2026",
+      "source_url": "http://tabnet.datasus.gov.br/cgi/tabcgi.exe?cnes/cnv/estabpb.def",
+      "year": 2026,
+      "rows": 223,
+      "path": "gente/saude_estabelecimentos.json"
+    },
+    "gente.mortalidade_infantil": {
+      "source": "Ministério da Saúde, SIM e SINASC, óbitos de menores de 1 ano por nascidos vivos, 2019-2023",
+      "source_url": "http://tabnet.datasus.gov.br/cgi/tabcgi.exe?sim/cnv/inf10pb.def",
+      "year": 2023,
+      "rows": 223,
+      "path": "gente/mortalidade_infantil.json"
     }
   },
-  "generated_at": "2026-09-04T19:43:09+00:00"
+  "generated_at": "2026-09-04T20:00:37+00:00"
 }

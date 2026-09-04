@@ -85,7 +85,7 @@ def volume_by_reservoir() -> dict[int, dict]:
     for path, name in (("reservatorio/filtros-reservatorios", "filtros-reservatorios.json"),
                        ("reservatorio/search", "reservatorio_search.json")):
         try:
-            payload = fetch(path, name=name)
+            payload = fetch(path, name=name, retries=2, timeout=30)
         except (SeiraUnavailable, SeiraForbidden):
             continue
         rows = payload if isinstance(payload, list) else embedded(payload, "reservatorio")

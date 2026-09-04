@@ -15,7 +15,8 @@ from .agua_acudes import API, SeiraForbidden, SeiraUnavailable, embedded, fetch
 
 
 def ddmm_to_degrees(value: float | None, sign: int) -> float | None:
-    if value is None:
+    """SEIRA writes 0.0 when a post has no surveyed coordinate, which is not a real position."""
+    if not value:
         return None
     degrees, minutes = divmod(abs(value), 100)
     return sign * (degrees + minutes / 60)
@@ -29,7 +30,7 @@ def state_outline():
 def precipitation_by_post() -> dict[int, dict]:
     """Recent rainfall per post, empty when SEIRA exposes no public pluviometria resource."""
     try:
-        payload = fetch("pluviometria", name="pluviometria.json")
+        payload = fetch("pluviometria", name="pluviometria.json", retries=2, timeout=30)
     except (SeiraUnavailable, SeiraForbidden):
         return {}
     rows = payload if isinstance(payload, list) else embedded(payload, "pluviometria")
@@ -50,15 +51,15 @@ def run() -> None:
     readings = precipitation_by_post()
     outline = state_outline()
 
-    features, outside = [], []
+    features, missing_coord, outside_state = [], [], []
     for post in posts:
         lat = ddmm_to_degrees(post.get("latitude"), -1)
         lon = ddmm_to_degrees(post.get("longitude"), -1)
         if lat is None or lon is None:
-            outside.append(post.get("nome"))
+            missing_coord.append(post.get("nome"))
             continue
         if not outline.contains(Point(lon, lat)):
-            outside.append(post.get("nome"))
+            outside_state.append(post.get("nome"))
             continue
         reading = readings.get(post["id"], {})
         features.append({
@@ -85,8 +86,12 @@ def run() -> None:
         rows=len(features),
         refreshed_at=date.today().isoformat(),
         with_rain=with_rain,
+        sem_coordenada=len(missing_coord),
+        fora_do_estado=len(outside_state),
         rain_note=None if with_rain else "Leituras de chuva exigem autenticação no SEIRA; só o cadastro dos postos é público.",
     )
-    print(f"postos de chuva: {len(features)} dentro da Paraíba, {len(outside)} descartados, {with_rain} com leitura")
-    if outside:
-        print(f"  descartados: {', '.join(str(n) for n in outside[:8])}")
+    print(f"postos de chuva: {len(features)} mapeados, {len(missing_coord)} sem coordenada, {len(outside_state)} fora do estado, {with_rain} com leitura")
+    if missing_coord:
+        print(f"  sem coordenada no SEIRA: {', '.join(str(n) for n in missing_coord)}")
+    if outside_state:
+        print(f"  fora da Paraíba: {', '.join(str(n) for n in outside_state)}")
