@@ -20,21 +20,26 @@ const TONE_STYLE: Record<CellTone, string> = {
 
 export function CompareTable({ units, unitNames, loaded, onRemove, onClear }: Props) {
   return (
-    <section className="cordel-bloco cordel-sombra flex flex-col gap-3 p-4" aria-label="Comparação">
-      <header className="flex items-baseline justify-between gap-4">
+    <section className="cordel-bloco cordel-sombra flex max-h-[calc(100vh-6rem)] flex-col gap-3 p-4" aria-label="Comparação">
+      <header className="flex shrink-0 items-baseline justify-between gap-4">
         <h2 className="cordel-titulo text-[20px] text-tinta">Comparar</h2>
-        <button type="button" onClick={onClear} className="cursor-pointer text-base text-tinta-fraca underline underline-offset-2 hover:text-tinta">
-          limpar
+        <button
+          type="button"
+          onClick={onClear}
+          aria-label="Fechar comparação"
+          className="cursor-pointer px-2 text-xl leading-none text-tinta-fraca hover:text-tinta"
+        >
+          ×
         </button>
       </header>
       {units.some((unit) => unit.kind === 'meso') && (
-        <p className="text-sm leading-snug text-tinta-fraca">
+        <p className="shrink-0 text-sm leading-snug text-tinta-fraca">
           Nas mesorregiões, contagens são somadas e taxas e índices entram como média ponderada pela população de cada município.
         </p>
       )}
-      <div className="overflow-x-auto">
+      <div className="min-h-0 flex-1 overflow-auto">
         <table className="w-full border-collapse text-base">
-          <thead>
+          <thead className="sticky top-0 z-10 bg-papel">
             <tr>
               <th className="py-1 pr-3 text-left font-display text-[12px] uppercase leading-none text-tinta">Indicador</th>
               {units.map((unit, i) => (
