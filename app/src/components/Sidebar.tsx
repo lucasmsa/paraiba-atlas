@@ -7,6 +7,7 @@ import { PillarTabs } from './PillarTabs'
 import { LayerList } from './LayerList'
 import { LayerCard } from './LayerCard'
 import { MesoPicker } from './MesoPicker'
+import { useScrollToCard } from '../hooks/useScrollToCard'
 
 export interface ActiveCard {
   layer: AtlasLayer
@@ -29,6 +30,8 @@ interface Props {
 }
 
 export function Sidebar({ pillar, layers, activeIds, cards, mesos, compare, onSelectPillar, onToggleLayer }: Props) {
+  const cardsRef = useScrollToCard(cards.map((card) => card.layer.id).join(',') || null)
+
   return (
     <div className="cordel-papel flex h-full flex-col gap-5 overflow-y-auto p-5">
       <header className="flex flex-col gap-2">
@@ -39,19 +42,22 @@ export function Sidebar({ pillar, layers, activeIds, cards, mesos, compare, onSe
       </header>
       <PillarTabs active={pillar?.id ?? null} onSelect={onSelectPillar} />
       {pillar && <LayerList layers={layers} activeIds={activeIds} onToggle={onToggleLayer} />}
-      {pillar &&
-        cards.map((card) => (
-          <LayerCard
-            key={card.layer.id}
-            layer={card.layer}
-            metric={card.metric}
-            entries={card.entries}
-            colors={card.colors}
-            labels={card.labels}
-            provenance={card.provenance}
-            ramp={pillar.ramp}
-          />
-        ))}
+      {pillar && cards.length > 0 && (
+        <div ref={cardsRef} className="flex scroll-mt-4 flex-col gap-5">
+          {cards.map((card) => (
+            <LayerCard
+              key={card.layer.id}
+              layer={card.layer}
+              metric={card.metric}
+              entries={card.entries}
+              colors={card.colors}
+              labels={card.labels}
+              provenance={card.provenance}
+              ramp={pillar.ramp}
+            />
+          ))}
+        </div>
+      )}
       <footer className="mt-auto flex flex-col gap-2 border-t-[3px] border-tinta pt-4">
         <MesoPicker mesos={mesos} has={compare.has} isFull={compare.isFull} onToggle={compare.toggle} />
         <p className="text-sm leading-snug text-tinta-fraca">

@@ -198,7 +198,7 @@
       "source": "OpenStreetMap via Overpass API (amenity=school)",
       "source_url": "https://overpass-api.de/api/interpreter?data=%5Bout%3Ajson%5D%5Btimeout%3A180%5D%3Barea%5B%22ISO3166-2%22%3D%22BR-PB%22%5D-%3E.pb%3B%28node%5B%22amenity%22%3D%22school%22%5D%28area.pb%29%3Bway%5B%22amenity%22%3D%22school%22%5D%28area.pb%29%3Brelation%5B%22amenity%22%3D%22school%22%5D%28area.pb%29%3B%29%3Bout+tags+center%3B",
       "year": 2026,
-      "year_note": "Dados do OSM em 2026-09-04T20:33:31Z. O mapeamento do OSM é feito por voluntários, então esta camada não é um censo escolar: a ausência de um ponto significa que ninguém mapeou aquela escola, não que ela não exista. 152 dos 223 municípios têm ao menos uma escola mapeada, e a cobertura é muito mais densa em João Pessoa e Campina Grande que no interior.",
+      "year_note": "Dados do OSM em 2026-09-04T20:33:31Z. O mapeamento do OSM é feito por voluntários, então esta camada não é um censo escolar: a ausência de um ponto significa que ninguém mapeou aquela escola, não que ela não exista. Só 152 dos 223 municípios têm ao menos uma escola mapeada, e os 71 restantes reúnem 13% da população do estado. A falha não segue o tamanho da cidade: João Pessoa e Campina Grande somam 21,6% dos pontos para 31,5% da população, ou seja, estão menos mapeadas por habitante que o município mediano que tem algum ponto. Use a camada para ver onde há escolas, nunca para contar quantas existem.",
       "rows": 926,
       "path": "gente/escolas.geojson",
       "license": "ODbL 1.0 (OpenStreetMap contributors)",
@@ -206,5 +206,5 @@
       "municipios_com_ponto": 152
     }
   },
-  "generated_at": "2026-09-04T20:35:09+00:00"
+  "generated_at": "2026-09-04T20:36:37+00:00"
 }

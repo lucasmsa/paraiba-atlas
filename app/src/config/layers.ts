@@ -416,6 +416,28 @@ export const LAYERS: AtlasLayer[] = [
       comoLer: 'Cores mais escuras indicam nota maior. Compare com a camada dos anos iniciais no mesmo município: a queda entre as duas costuma ser maior que a distância entre municípios vizinhos. A maior queda do estado é em Coxixola, de 8,2 para 5,5.',
     },
   },
+  {
+    kind: 'points',
+    id: 'gente.escolas',
+    pillar: 'gente',
+    label: 'Escolas mapeadas',
+    geoPath: 'gente/escolas.geojson',
+    labelField: 'nome',
+    sizeField: null,
+    color: '#9b2f1f',
+    unit: 'escola',
+    detailFields: [
+      { field: 'municipio', label: 'Município' },
+      { field: 'operador', label: 'Operador' },
+      { field: 'operador_tipo', label: 'Rede' },
+      { field: 'nivel', label: 'Nível' },
+    ],
+    card: {
+      oQueE: 'Escolas com posição registrada no OpenStreetMap, o mapa colaborativo. São 926 pontos na Paraíba, cada um conferido contra o polígono do seu município.',
+      porQueImporta: 'É a única forma de ver escola como lugar no mapa, e não como nota média do município. O censo escolar do INEP conta cada escola do país mas não publica coordenada nenhuma, então não existe base oficial de onde as escolas ficam.',
+      comoLer: 'Leia como onde há escola mapeada, nunca como quantas escolas existem. O OpenStreetMap é feito por voluntários, e o mapa mostra onde alguém mapeou: 71 municípios, com 13% da população do estado, não têm um único ponto. Cuité e Cacimba de Dentro têm mais pontos que Patos, o que diz mais sobre quem mapeou do que sobre a rede de ensino.',
+    },
+  },
 ]
 
 export const layerById = (id: string | null) => (id ? LAYERS.find((layer) => layer.id === id) ?? null : null)

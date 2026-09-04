@@ -9,6 +9,12 @@ The trade is coverage. OSM is contributor-driven, so this is emphatically not a 
 an absent point means nobody mapped that school, not that no school exists. Counts per
 município are emitted alongside the points so the unevenness is measurable rather than
 merely disclosed.
+
+The unevenness does not follow urbanization, which is worth stating because the obvious
+assumption is wrong. João Pessoa and Campina Grande hold 21.6% of the points but 31.5%
+of the state's population, so per capita they are mapped less thoroughly than the median
+município that has any points at all. The real pattern is that individual contributors
+mapped particular municípios exhaustively while 71 municípios have no school at all.
 """
 import json
 from collections import Counter
@@ -151,9 +157,12 @@ def run() -> None:
         year_note=(
             f"Dados do OSM em {osm_timestamp}. O mapeamento do OSM é feito por voluntários, "
             "então esta camada não é um censo escolar: a ausência de um ponto significa que "
-            f"ninguém mapeou aquela escola, não que ela não exista. {len(by_municipio)} dos 223 "
-            "municípios têm ao menos uma escola mapeada, e a cobertura é muito mais densa em "
-            "João Pessoa e Campina Grande que no interior."
+            f"ninguém mapeou aquela escola, não que ela não exista. Só {len(by_municipio)} dos "
+            f"223 municípios têm ao menos uma escola mapeada, e os {223 - len(by_municipio)} "
+            "restantes reúnem 13% da população do estado. A falha não segue o tamanho da cidade: "
+            "João Pessoa e Campina Grande somam 21,6% dos pontos para 31,5% da população, ou seja, "
+            "estão menos mapeadas por habitante que o município mediano que tem algum ponto. "
+            "Use a camada para ver onde há escolas, nunca para contar quantas existem."
         ),
         rows=len(features),
         path="gente/escolas.geojson",

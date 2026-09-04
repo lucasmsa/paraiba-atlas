@@ -10,6 +10,7 @@ from .steps import (
     gente_crime,
     gente_economia,
     gente_escolas,
+    gente_escolas_pontos,
     gente_saude,
     idade,
     moradores,
@@ -42,6 +43,7 @@ STEPS = {
     "idade": idade.run,
     "crime": gente_crime.run,
     "escolas": gente_escolas.run,
+    "escolas_pontos": gente_escolas_pontos.run,
     "saude": gente_saude.run,
     "economia": gente_economia.run,
 }
