@@ -412,8 +412,8 @@ export const LAYERS: AtlasLayer[] = [
     format: 'decimal',
     card: {
       oQueE: 'A mesma nota do IDEB, agora para o 6º ao 9º ano da rede pública.',
-      porQueImporta: 'A comparação entre as duas faixas é o dado mais revelador da educação paraibana: a mediana cai de 5,2 nos anos iniciais para 4,3 nos anos finais. O aprendizado que se constrói até o 5º ano não se sustenta depois dele, e isso vale para quase todo o estado.',
-      comoLer: 'Cores mais escuras indicam nota maior. Compare com a camada dos anos iniciais no mesmo município: a queda entre as duas é quase sempre maior que a diferença entre municípios.',
+      porQueImporta: 'A comparação entre as duas faixas é o dado mais revelador da educação paraibana: a mediana cai de 5,2 nos anos iniciais para 4,3 nos anos finais, e 209 dos 217 municípios com nota nas duas faixas pioram do 5º para o 9º ano. O aprendizado construído até o 5º ano não se sustenta depois dele, e isso quase não depende de qual município se olhe.',
+      comoLer: 'Cores mais escuras indicam nota maior. Compare com a camada dos anos iniciais no mesmo município: a queda entre as duas costuma ser maior que a distância entre municípios vizinhos. A maior queda do estado é em Coxixola, de 8,2 para 5,5.',
     },
   },
 ]
