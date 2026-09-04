@@ -27,9 +27,10 @@ interface Props {
   compare: ReturnType<typeof useCompare>
   onSelectPillar: (id: PillarId) => void
   onToggleLayer: (id: string) => void
+  onOpenSobre: () => void
 }
 
-export function Sidebar({ pillar, layers, activeIds, cards, mesos, compare, onSelectPillar, onToggleLayer }: Props) {
+export function Sidebar({ pillar, layers, activeIds, cards, mesos, compare, onSelectPillar, onToggleLayer, onOpenSobre }: Props) {
   const cardsRef = useScrollToCard(cards.map((card) => card.layer.id).join(',') || null)
 
   return (
@@ -63,6 +64,9 @@ export function Sidebar({ pillar, layers, activeIds, cards, mesos, compare, onSe
         <p className="text-sm leading-snug text-tinta-fraca">
           Clique em um município no mapa e use "Comparar" para colocá-lo lado a lado. Até seis unidades.
         </p>
+        <button type="button" onClick={onOpenSobre} className="cursor-pointer self-start text-sm text-tinta underline underline-offset-2 hover:decoration-2">
+          Sobre o atlas e as fontes
+        </button>
       </footer>
     </div>
   )

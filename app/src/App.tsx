@@ -1,10 +1,11 @@
-import { useCallback, useMemo } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 import { Sidebar, type ActiveCard } from './components/Sidebar'
 import { MapCanvas } from './components/MapCanvas'
 import { HoverTooltip } from './components/HoverTooltip'
 import { MunicipioPanel } from './components/MunicipioPanel'
 import { PointDetail } from './components/PointDetail'
 import { CompareTable } from './components/CompareTable'
+import { Sobre } from './components/Sobre'
 import { LAYERS, layerById } from './config/layers'
 import { PILLARS } from './config/pillars'
 import type { Metric, MunicipioIndex } from './data/contract'
@@ -36,6 +37,7 @@ function unitName(unit: CompareUnit, index: MunicipioIndex, mesos: { cod: string
 export function App() {
   const { state, selectPillar, toggleLayer, selectMunicipio } = useAtlasState()
   const compare = useCompare()
+  const [sobreOpen, setSobreOpen] = useState(false)
   const pillar = PILLARS.find((p) => p.id === state.pillar) ?? null
   const fillLayer = layerById(state.fillLayerId)
   const pointLayer = layerById(state.pointLayerId)
@@ -120,8 +122,10 @@ export function App() {
           compare={compare}
           onSelectPillar={selectPillar}
           onToggleLayer={toggleLayer}
+          onOpenSobre={() => setSobreOpen(true)}
         />
       </div>
+      {sobreOpen && <Sobre onClose={() => setSobreOpen(false)} />}
     </main>
   )
 }
