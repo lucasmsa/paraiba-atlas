@@ -48,8 +48,18 @@ export interface PointLayer extends LayerBase {
   fillPercentField?: string
 }
 
+export interface LineLayer extends LayerBase {
+  kind: 'lines'
+  geoPath: string
+  labelField?: string
+  /** Field whose value picks a color and width from `styles`. */
+  classField?: string
+  styles: Record<string, { color: string; width: number; label: string }>
+  fallback: { color: string; width: number }
+}
+
 export type FillLayer = ChoroplethLayer | CategoricalLayer
-export type AtlasLayer = FillLayer | PointLayer
+export type AtlasLayer = FillLayer | PointLayer | LineLayer
 
 export const LAYERS: AtlasLayer[] = [
   {
@@ -458,8 +468,121 @@ export const LAYERS: AtlasLayer[] = [
       comoLer: 'Três cores para três tipos de rocha. Repare no descompasso entre área e número de manchas: o domínio fraturado é uma massa contínua de 40 polígonos, enquanto o granular são 475 manchas estreitas ao longo dos rios. A porcentagem é da área do estado, não da contagem.',
     },
   },
+  {
+    kind: 'lines',
+    id: 'terra.rodovias',
+    pillar: 'terra',
+    label: 'Rodovias',
+    geoPath: 'terra/rodovias.geojson',
+    labelField: 'ref',
+    classField: 'jurisdicao',
+    styles: {
+      federal: { color: '#7d2b12', width: 2.6, label: 'Federal (BR)' },
+      estadual: { color: '#b5762a', width: 1.4, label: 'Estadual (PB)' },
+    },
+    fallback: { color: '#8a7a66', width: 1 },
+    card: {
+      oQueE: 'As rodovias federais e estaduais da Paraíba, do OpenStreetMap. São 12 rodovias federais somando 1.962 km e 133 estaduais somando 4.508 km.',
+      porQueImporta: 'Estrada é como a Paraíba se move: não há malha ferroviária de passageiros fora de um trecho no litoral, e nenhuma linha de ônibus do estado publica horário em formato aberto. A BR-230 atravessa o estado inteiro por 687 km, do litoral ao Sertão, e é o eixo ao longo do qual quase tudo se organiza.',
+      comoLer: 'Traço grosso escuro é rodovia federal, traço fino claro é estadual. Aproxime o mapa para ver as siglas.',
+    },
+  },
+  {
+    kind: 'lines',
+    id: 'terra.ferrovia',
+    pillar: 'terra',
+    label: 'Trem urbano',
+    geoPath: 'terra/ferrovia.geojson',
+    labelField: 'nome',
+    classField: 'tipo',
+    styles: {
+      linha: { color: '#1e5f66', width: 3, label: 'Linha' },
+      estacao: { color: '#1e5f66', width: 2, label: 'Estação' },
+    },
+    fallback: { color: '#1e5f66', width: 2 },
+    card: {
+      oQueE: 'A linha de trem urbano operada pela CBTU, com 31 km entre Santa Rita e Cabedelo passando por João Pessoa, e suas 13 estações.',
+      porQueImporta: 'É o único transporte sobre trilhos de passageiros em atividade na Paraíba. Toda a malha ferroviária do interior, construída para escoar algodão, está desativada.',
+      comoLer: 'A linha e as estações da única rota em operação. O mapa acaba aqui: não existe dado aberto de itinerário ou horário de ônibus em nenhum município do estado.',
+    },
+  },
+  {
+    kind: 'points',
+    id: 'terra.rodoviarias',
+    pillar: 'terra',
+    label: 'Terminais de ônibus',
+    geoPath: 'terra/rodoviarias.geojson',
+    labelField: 'nome',
+    sizeField: null,
+    color: '#5c4630',
+    unit: 'terminal',
+    detailFields: [
+      { field: 'municipio', label: 'Município' },
+      { field: 'operador', label: 'Operador' },
+    ],
+    card: {
+      oQueE: 'Terminais de ônibus mapeados no OpenStreetMap: 68 pontos em 38 dos 223 municípios, misturando rodoviárias intermunicipais e terminais urbanos, porque o mapa colaborativo usa a mesma etiqueta para os dois.',
+      porQueImporta: 'O ônibus é como a maioria dos paraibanos viaja entre cidades, e a rodoviária é o ponto por onde isso passa.',
+      comoLer: 'Leia como onde há terminal mapeado, não como a rede completa. Nenhuma operadora da Paraíba publica itinerário em formato aberto, então não há como mostrar para onde vai cada linha nem a que horas.',
+    },
+  },
+  {
+    kind: 'choropleth',
+    id: 'gente.cor_preta_parda',
+    pillar: 'gente',
+    label: 'População preta e parda',
+    path: 'gente/cor_preta_parda.json',
+    format: 'percent',
+    card: {
+      oQueE: 'A parcela dos moradores que se declarou preta ou parda ao Censo de 2022. As duas categorias somadas são como a estatística brasileira costuma medir a população negra, e a declaração é do próprio morador.',
+      porQueImporta: 'Mostra como a população paraibana se distribui entre um Sertão de colonização pecuarista e um litoral de engenho, e permite ler qualquer outra camada do atlas contra essa distribuição.',
+      comoLer: 'Cores mais escuras indicam parcela maior. Não há lado bom nem ruim nesta camada, então a comparação não marca melhor e pior. Marcação aparece com a menor parcela porque é terra indígena Potiguara, onde a maioria se declara indígena.',
+    },
+  },
+  {
+    kind: 'choropleth',
+    id: 'gente.pobreza',
+    pillar: 'gente',
+    label: 'Famílias no CadÚnico',
+    path: 'gente/pobreza.json',
+    format: 'decimal',
+    card: {
+      oQueE: 'Famílias inscritas no Cadastro Único, o registro federal de quem tem baixa renda e pode receber benefícios sociais, para cada 100 domicílios do município.',
+      porQueImporta: 'É a medida de pobreza mais atual que existe por município, atualizada todo mês, enquanto o Censo sai a cada dez anos. Onde o número é alto, a maior parte das casas depende de transferência de renda.',
+      comoLer: 'Cores mais escuras indicam mais famílias cadastradas por domicílio. Um município passa de 100 porque família do CadÚnico e domicílio do Censo não são a mesma unidade, e o cadastro acumula registros antigos.',
+    },
+  },
+  {
+    kind: 'choropleth',
+    id: 'gente.moradia_alugada',
+    pillar: 'gente',
+    label: 'Domicílios alugados',
+    path: 'gente/moradia_alugada.json',
+    format: 'percent',
+    card: {
+      oQueE: 'A parcela dos domicílios do município que é alugada, segundo o Censo de 2022.',
+      porQueImporta: 'É o sinal mais próximo de mercado imobiliário que o atlas consegue, já que o Censo de 2022 não publicou valor de aluguel para nenhum município. Onde quase ninguém aluga, não há preço a medir: a casa se herda ou se constrói.',
+      comoLer: 'Cores mais escuras indicam mais aluguel. Compare com a camada de domicílios próprios: as duas quase se completam, e a diferença é a moradia cedida, comum na zona rural.',
+    },
+  },
+  {
+    kind: 'choropleth',
+    id: 'gente.moradia_propria',
+    pillar: 'gente',
+    label: 'Domicílios próprios',
+    path: 'gente/moradia_propria.json',
+    format: 'percent',
+    card: {
+      oQueE: 'A parcela dos domicílios do município cujos moradores são donos da casa, segundo o Censo de 2022.',
+      porQueImporta: 'Casa própria em município pequeno raramente significa patrimônio: significa que não existe mercado de aluguel e que a casa foi construída ou herdada. É por isso que a camada não marca melhor e pior.',
+      comoLer: 'Cores mais escuras indicam mais domicílios próprios. Os municípios com maior taxa são os menores do estado, não os mais ricos.',
+    },
+  },
 ]
 
 export const layerById = (id: string | null) => (id ? LAYERS.find((layer) => layer.id === id) ?? null : null)
 export const isFillLayer = (layer: AtlasLayer | null): layer is FillLayer => layer?.kind === 'choropleth' || layer?.kind === 'categorical'
 export const isPointLayer = (layer: AtlasLayer | null): layer is PointLayer => layer?.kind === 'points'
+export const isLineLayer = (layer: AtlasLayer | null): layer is LineLayer => layer?.kind === 'lines'
+export const isOverlayLayer = (layer: AtlasLayer | null): layer is PointLayer | LineLayer =>
+  isPointLayer(layer) || isLineLayer(layer)

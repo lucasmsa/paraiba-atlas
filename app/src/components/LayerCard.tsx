@@ -43,6 +43,16 @@ export function LayerCard({ layer, metric, entries, colors, labels, provenance, 
         <p className="mb-2">{layer.card.comoLer}</p>
         {layer.kind === 'choropleth' && metric && <Legend metric={metric} ramp={ramp} format={layer.format} />}
         {layer.kind === 'categorical' && entries && <ClassLegend entries={entries} colors={colors} labels={labels} />}
+        {layer.kind === 'lines' && (
+          <ul className="flex flex-col gap-1">
+            {Object.entries(layer.styles).map(([value, style]) => (
+              <li key={value} className="flex items-center gap-2.5 text-base text-tinta">
+                <span className="inline-block h-0 w-7 shrink-0" style={{ borderTop: `${Math.max(style.width, 2)}px solid ${style.color}` }} />
+                {style.label}
+              </li>
+            ))}
+          </ul>
+        )}
         {layer.kind === 'points' && (
           <p className="flex items-center gap-2.5">
             <span className="inline-block h-4 w-4 rounded-full border border-papel" style={{ background: layer.color }} />

@@ -6,7 +6,7 @@ interface Props {
   onToggle: (id: string) => void
 }
 
-const KIND_LABEL: Record<AtlasLayer['kind'], string> = { choropleth: 'por município', categorical: 'áreas', points: 'pontos' }
+const KIND_LABEL: Record<AtlasLayer['kind'], string> = { choropleth: 'por município', categorical: 'áreas', points: 'pontos', lines: 'linhas' }
 
 export function LayerList({ layers, activeIds, onToggle }: Props) {
   if (layers.length === 0) {

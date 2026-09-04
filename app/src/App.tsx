@@ -20,6 +20,7 @@ import { useAtlasMap } from './map/useAtlasMap'
 import { useChoroplethLayer } from './map/useChoroplethLayer'
 import { useCategoricalLayer } from './map/useCategoricalLayer'
 import { usePointLayer } from './map/usePointLayer'
+import { useLineLayer } from './map/useLineLayer'
 import { useMunicipioInteraction } from './map/useMunicipioInteraction'
 import { summarize } from './utils/summary'
 
@@ -40,10 +41,11 @@ export function App() {
   const [sobreOpen, setSobreOpen] = useState(false)
   const pillar = PILLARS.find((p) => p.id === state.pillar) ?? null
   const fillLayer = layerById(state.fillLayerId)
-  const pointLayer = layerById(state.pointLayerId)
+  const overlayLayer = layerById(state.overlayLayerId)
   const choropleth = fillLayer?.kind === 'choropleth' ? fillLayer : null
   const categorical = fillLayer?.kind === 'categorical' ? fillLayer : null
-  const points = pointLayer?.kind === 'points' ? pointLayer : null
+  const points = overlayLayer?.kind === 'points' ? overlayLayer : null
+  const lines = overlayLayer?.kind === 'lines' ? overlayLayer : null
   const pillarLayers = useMemo(() => LAYERS.filter((layer) => layer.pillar === pillar?.id), [pillar])
 
   const manifest = useManifest()
@@ -57,6 +59,7 @@ export function App() {
   useChoroplethLayer(mapRef, ready, metric, pillar?.ramp ?? [])
   useCategoricalLayer(mapRef, ready, categorical, entries, colors)
   usePointLayer(mapRef, ready, points)
+  useLineLayer(mapRef, ready, lines)
   const pointSelection = usePointSelection(mapRef, ready, Boolean(points))
   const onSelect = useCallback((cod: string | null) => selectMunicipio(cod), [selectMunicipio])
   const hover = useMunicipioInteraction(mapRef, ready, state.selectedCod, onSelect)
@@ -68,8 +71,8 @@ export function App() {
   const selectedUnit: CompareUnit | null = state.selectedCod ? { kind: 'municipio', cod: state.selectedCod } : null
   const summary = state.selectedCod && allMetrics ? summarize(state.selectedCod, allMetrics) : null
 
-  const activeIds = [fillLayer?.id, pointLayer?.id].filter((id): id is string => Boolean(id))
-  const cards: ActiveCard[] = [fillLayer, pointLayer]
+  const activeIds = [fillLayer?.id, overlayLayer?.id].filter((id): id is string => Boolean(id))
+  const cards: ActiveCard[] = [fillLayer, overlayLayer]
     .filter((layer) => layer !== null && layer.pillar === pillar?.id)
     .map((layer) => ({
       layer: layer!,

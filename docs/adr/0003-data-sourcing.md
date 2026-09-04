@@ -23,7 +23,7 @@ Terra
 | Picos | OpenStreetMap natural=peak via Overpass, elevation checked against terrain tiles | frozen |
 | Relevo 3D | AWS Terrain Tiles (Terrarium) for MapLibre terrain and hillshade | tiles |
 | Escalada | Hand-entered crag index, marked editorial: the 8 crags named publicly by the guide's authors, geocoded against the município polygons and rejected if a coordinate falls outside its município. Route counts, styles and grades stay empty until they are read off the printed guide. theCrag rejected after a live check: its API is closed to non-commercial applications (a key requires a signed agreement) and its data is CC BY-NC-SA. OpenStreetMap rejected: 4 unnamed climbing features in the whole state | editorial |
-| Mobilidade | OpenStreetMap via Overpass: federal and state highways (BR-230, BR-101, BR-104, BR-361, BR-412, PB roads), the CBTU João Pessoa to Cabedelo line and stations, bus terminals | frozen |
+| Mobilidade | OpenStreetMap via Overpass: 12 federal and 133 state highways dissolved from way fragments into one feature per route, the CBTU Santa Rita to Cabedelo commuter line with its 13 stations, and 68 bus terminals in 38 municípios | frozen |
 
 Água
 
@@ -49,6 +49,8 @@ Gente
 Climbing: the crag index is metadata only (name, município, coordinates, route count, styles, grade range, link to the guide), no route topos. Every coordinate records which source produced it and at what precision, and a crag that cannot be placed ships without geometry rather than with a guessed point. OpenBeta rejected for coverage (8 climbs in all of Brazil).
 
 Soils: the 1972 legend predates SiBCS, the Brazilian soil classification system adopted in 1999, so every class carries its modern name, the original legend string and a plain-Portuguese explanation. The correlation is sourced to the SiBCS 5th edition rather than inferred. Two of 22 classes cannot be correlated from the legend alone and are marked unconfirmed with the reason shown in the legend.
+
+Mobilidade: the commuter rail runs Santa Rita to Cabedelo through João Pessoa, not João Pessoa to Cabedelo as this ADR first recorded. Santa Rita is the western terminus. No Paraíba bus operator publishes a GTFS feed, so the layer carries terminals as places and no route or schedule exists to show.
 
 Schools: the point layer changed source mid-build. This ADR originally assumed Censo Escolar carried coordinates; it does not, in any year checked. OpenStreetMap is the only reachable source, and it is contributor-driven rather than a census, so coverage is uneven and denser in the two big cities. The layer says so, and absence of a point is not evidence of absence of a school.
 
