@@ -9,6 +9,7 @@ from .steps import (
     boundaries,
     gente_crime,
     gente_economia,
+    gente_escolas,
     gente_saude,
     idade,
     moradores,
@@ -40,6 +41,7 @@ STEPS = {
     "moradores": moradores.run,
     "idade": idade.run,
     "crime": gente_crime.run,
+    "escolas": gente_escolas.run,
     "saude": gente_saude.run,
     "economia": gente_economia.run,
 }

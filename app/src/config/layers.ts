@@ -390,6 +390,32 @@ export const LAYERS: AtlasLayer[] = [
       comoLer: 'Cores mais escuras indicam mais contratos por habitante.',
     },
   },
+  {
+    kind: 'choropleth',
+    id: 'gente.ideb_anos_iniciais',
+    pillar: 'gente',
+    label: 'IDEB anos iniciais',
+    path: 'gente/ideb_anos_iniciais.json',
+    format: 'decimal',
+    card: {
+      oQueE: 'A nota do município no IDEB, o Índice de Desenvolvimento da Educação Básica, para o 1º ao 5º ano da rede pública. Vai de 0 a 10 e combina duas coisas: quanto os alunos aprenderam em português e matemática, e quantos passaram de ano.',
+      porQueImporta: 'É a medida oficial de qualidade da escola pública brasileira, e a única comparável entre todos os municípios. Os anos iniciais são onde a Paraíba vai melhor: vários municípios pequenos do interior superam a capital.',
+      comoLer: 'Cores mais escuras indicam nota maior. Seis municípios não têm nota publicada, geralmente por terem poucos alunos avaliados, e aparecem hachurados.',
+    },
+  },
+  {
+    kind: 'choropleth',
+    id: 'gente.ideb_anos_finais',
+    pillar: 'gente',
+    label: 'IDEB anos finais',
+    path: 'gente/ideb_anos_finais.json',
+    format: 'decimal',
+    card: {
+      oQueE: 'A mesma nota do IDEB, agora para o 6º ao 9º ano da rede pública.',
+      porQueImporta: 'A comparação entre as duas faixas é o dado mais revelador da educação paraibana: a mediana cai de 5,2 nos anos iniciais para 4,3 nos anos finais. O aprendizado que se constrói até o 5º ano não se sustenta depois dele, e isso vale para quase todo o estado.',
+      comoLer: 'Cores mais escuras indicam nota maior. Compare com a camada dos anos iniciais no mesmo município: a queda entre as duas é quase sempre maior que a diferença entre municípios.',
+    },
+  },
 ]
 
 export const layerById = (id: string | null) => (id ? LAYERS.find((layer) => layer.id === id) ?? null : null)
