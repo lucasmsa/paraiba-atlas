@@ -1,0 +1,14 @@
+{
+  "note": "Crag index, editorial. Names are the crags the authors of the Guia de Escalada na Paraíba (Timotheo e Falcão, 2023) list publicly on escaladanaparaiba.com.br. Route counts, styles and grades are filled from the printed guide. Coordinates are geocoded from OpenStreetMap and must be checked on site.",
+  "crags": [
+    {"nome": "Pedra da Boca", "municipio": "Araruna", "query": "Pedra da Boca, Araruna, Paraíba"},
+    {"nome": "Banguelo", "municipio": "Cajá", "query": "Cajá, Paraíba"},
+    {"nome": "Algodão de Jandaíra", "municipio": "Algodão de Jandaíra", "query": "Algodão de Jandaíra, Paraíba"},
+    {"nome": "Parque do Poeta", "municipio": "Campina Grande", "query": "Parque do Poeta Ronaldo Cunha Lima, Campina Grande, Paraíba"},
+    {"nome": "Pedra do Marinho", "municipio": "Massaranduba", "query": "Massaranduba, Paraíba"},
+    {"nome": "Pedra do Cordeiro", "municipio": null, "query": null},
+    {"nome": "Almas Gêmeas", "municipio": null, "query": null},
+    {"nome": "Pedra das Chaminés", "municipio": null, "query": null},
+    {"nome": "Pedra do Tendó", "municipio": "Teixeira", "query": "Pedra do Tendó, Teixeira, Paraíba"}
+  ]
+}

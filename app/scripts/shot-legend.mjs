@@ -1,0 +1,11 @@
+import { chromium } from '@playwright/test'
+const [url, out] = process.argv.slice(2)
+const browser = await chromium.launch()
+const page = await browser.newPage({ viewport: { width: 1440, height: 900 } })
+await page.goto(url)
+await page.waitForTimeout(6000)
+const legend = page.locator('ol[aria-label="Legenda"]').first()
+await legend.scrollIntoViewIfNeeded()
+await page.waitForTimeout(500)
+await legend.screenshot({ path: out })
+await browser.close()

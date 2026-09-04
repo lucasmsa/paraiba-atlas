@@ -1,0 +1,119 @@
+{
+  "layers": {
+    "geo.municipios": {
+      "source": "IBGE malhas municipais 2022",
+      "source_url": "https://servicodados.ibge.gov.br/api/v3/malhas/estados/25?formato=application/vnd.geo+json&qualidade=intermediaria&intrarregiao=municipio",
+      "year": 2022,
+      "rows": 223
+    },
+    "geo.mesorregioes": {
+      "source": "IBGE malhas 2022, mesorregiões",
+      "source_url": "https://servicodados.ibge.gov.br/api/v3/malhas/estados/25?formato=application/vnd.geo+json&qualidade=intermediaria&intrarregiao=mesorregiao",
+      "year": 2022,
+      "rows": 4
+    },
+    "gente.populacao": {
+      "source": "IBGE, Censo Demográfico 2022 (SIDRA 4709)",
+      "source_url": "https://servicodados.ibge.gov.br/api/v3/agregados/4709/periodos/2022/variaveis/93?localidades=N6[N3[25]]",
+      "year": 2022,
+      "rows": 223,
+      "path": "gente/populacao.json"
+    },
+    "gente.renda_per_capita": {
+      "source": "IBGE, Censo Demográfico 2022 (SIDRA 10295)",
+      "source_url": "https://servicodados.ibge.gov.br/api/v3/agregados/10295/periodos/2022/variaveis/13431?localidades=N6[N3[25]]&classificacao=2[6794]|86[95251]|58[95253]",
+      "year": 2022,
+      "rows": 223,
+      "path": "gente/renda_per_capita.json"
+    },
+    "gente.moradores_por_domicilio": {
+      "source": "IBGE, Censo Demográfico 2022 (SIDRA 9922)",
+      "source_url": "https://servicodados.ibge.gov.br/api/v3/agregados/9922/periodos/2022/variaveis/5930?localidades=N6[N3[25]]",
+      "year": 2022,
+      "rows": 223,
+      "path": "gente/moradores_por_domicilio.json"
+    },
+    "terra.solos": {
+      "source": "Embrapa Solos, Mapa exploratório de reconhecimento de solos da Paraíba (1972)",
+      "source_url": "https://geoinfo.dados.embrapa.br/geoserver/ows?service=WFS&version=1.0.0&request=GetFeature&typename=geonode%3Asolos_paraiba_wgs84_1&outputFormat=json&srs=EPSG%3A4326",
+      "year": 1972,
+      "rows": 315,
+      "path": "geo/terra/solos.geojson"
+    },
+    "agua.rede_agua": {
+      "source": "Ministério das Cidades, SINISA 2024 (água, base municipal)",
+      "source_url": "https://www.gov.br/cidades/pt-br/acesso-a-informacao/acoes-e-programas/saneamento/sinisa/resultados-sinisa/SINISA_Resultados_Ref2024.zip",
+      "year": 2024,
+      "rows": 214,
+      "path": "agua/rede_agua.json"
+    },
+    "terra.aquiferos": {
+      "source": "SGB, Mapa Hidrogeológico do Estado da Paraíba, Hidrogeologia",
+      "source_url": "https://geoportal.sgb.gov.br/server/rest/services/hidrologia/Mapa_Midrogeologico_Paraiba/MapServer/4",
+      "year": 2026,
+      "year_note": "service JSON states no publication year; year is the fetch year",
+      "rows": 524,
+      "path": "geo/terra/aquiferos.geojson"
+    },
+    "agua.rede_esgoto": {
+      "source": "Ministério das Cidades, SINISA 2024 (esgoto, base municipal)",
+      "source_url": "https://www.gov.br/cidades/pt-br/acesso-a-informacao/acoes-e-programas/saneamento/sinisa/resultados-sinisa/SINISA_ESGOTO_Planilhas_2024.zip",
+      "year": 2024,
+      "rows": 74,
+      "path": "agua/rede_esgoto.json"
+    },
+    "terra.dominios_hidro": {
+      "source": "SGB, Mapa Hidrogeológico do Estado da Paraíba, Domínio Hidrolitológico",
+      "source_url": "https://geoportal.sgb.gov.br/server/rest/services/hidrologia/Mapa_Midrogeologico_Paraiba/MapServer/5",
+      "year": 2026,
+      "year_note": "service JSON states no publication year; year is the fetch year",
+      "rows": 523,
+      "path": "geo/terra/dominios_hidro.geojson"
+    },
+    "terra.geologia": {
+      "source": "SGB, Unidades litoestratigráficas 1:1.000.000 (2004)",
+      "source_url": "https://geoportal.sgb.gov.br/server/rest/services/geologia/litoestratigrafia_1000000/MapServer/0",
+      "year": 2004,
+      "rows": 605,
+      "path": "geo/terra/geologia.geojson"
+    },
+    "terra.escalada": {
+      "source": "Índice editorial a partir do Guia de Escalada na Paraíba (Timotheo e Falcão, 2023); coordenadas OpenStreetMap Nominatim",
+      "source_url": "https://escaladanaparaiba.com.br/",
+      "year": 2023,
+      "rows": 5,
+      "editorial": true
+    },
+    "gente.idade_mediana": {
+      "source": "IBGE, Censo Demográfico 2022 (SIDRA 9756)",
+      "source_url": "https://servicodados.ibge.gov.br/api/v3/agregados/9756/periodos/2022/variaveis/10613?localidades=N6[N3[25]]&classificacao=86[95251]",
+      "year": 2022,
+      "rows": 223,
+      "path": "gente/idade_mediana.json"
+    },
+    "gente.envelhecimento": {
+      "source": "IBGE, Censo Demográfico 2022 (SIDRA 9756)",
+      "source_url": "https://servicodados.ibge.gov.br/api/v3/agregados/9756/periodos/2022/variaveis/9175?localidades=N6[N3[25]]&classificacao=86[95251]",
+      "year": 2022,
+      "rows": 223,
+      "path": "gente/envelhecimento.json"
+    },
+    "terra.geossitios": {
+      "source": "SGB GEOSSIT, inventário de geossítios",
+      "source_url": "https://www.sgb.gov.br/geossit/",
+      "year": 2026,
+      "year_note": "records carry their own 'Última alteração' date; year is the fetch year",
+      "rows": 40,
+      "path": "geo/terra/geossitios.geojson"
+    },
+    "terra.picos": {
+      "source": "OpenStreetMap via Overpass API",
+      "source_url": "https://overpass.kumi.systems/api/interpreter",
+      "year": 2026,
+      "year_note": "OSM data as of 2026-07-24T14:49:51Z",
+      "rows": 343,
+      "path": "geo/terra/picos.geojson"
+    }
+  },
+  "generated_at": "2026-09-04T19:32:19+00:00"
+}

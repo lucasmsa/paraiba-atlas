@@ -1,0 +1,61 @@
+# Official open sources per layer; theCrag for climbing until the guide index exists; census housing conditions plus verified rent, no scraping
+
+Status: accepted (2026-09-03)
+
+## Context
+
+CaliVibe's layers map onto Brazilian agencies for everything except housing prices and transit. Paraíba adds water (AESA monitors 126 reservoirs and a rain-gauge network) and geology (SGB publishes the state geologic map and a scored geosite inventory). Climbing data is thin: theCrag has a Paraíba area, OpenBeta lists 8 climbs for all of Brazil, and the only complete source is the printed Guia de Escalada na Paraíba (Timotheo and Falcão, 2023: 440 routes, 36 mountains, 8 municípios), with no online database.
+
+## Decision
+
+Only official or openly licensed sources. Each layer records its source and year in the manifest. A layer whose source cannot be confirmed ships as absent, never approximated.
+
+Terra
+
+| Layer | Source | Cadence |
+| --- | --- | --- |
+| Município and mesorregião boundaries | IBGE malhas API (2022) | frozen |
+| Bairros JP and CG | IBGE Censo 2022 bairro shapefile for PB (257 bairros; João Pessoa 64, Campina Grande 60) and census tracts carrying CD_BAIRRO, so the crosswalk is built in | frozen |
+| Geologia | SGB (Serviço Geológico do Brasil) lithostratigraphy 1:1.000.000 via the geoportal ArcGIS REST query (GeoJSON, fields SIGLA, NOME, LITOTIPOS, ERA, IDADE). GeoSGB shapefile downloads sit behind a login and have no static URL | frozen |
+| Solos | Embrapa GeoInfo, mapa exploratório de reconhecimento de solos da Paraíba (1:500.000, 1972, 320 polygons) via WFS GeoJSON. ZAPE is Pernambuco's zoning and does not cover Paraíba | frozen |
+| Aquíferos | SGB ArcGIS REST: Mapa Hidrogeológico da Paraíba service (524 aquifer polygons, domínio hidrolitológico, well density) and SIAGAS wells (19,548 in PB, paginated query) | frozen |
+| Geossítios | SGB GEOSSIT public record pages (31 PB geosites: Sousa 11, Cabaceiras 7, Boa Vista 5, others 8), parsed at one request per second: name, coordinates, lithology, scientific/educational/tourist scores, fragility. GeossitWeb export requires a login | frozen |
+| Picos | OpenStreetMap natural=peak via Overpass, elevation checked against terrain tiles | frozen |
+| Relevo 3D | AWS Terrain Tiles (Terrarium) for MapLibre terrain and hillshade | tiles |
+| Escalada | Hand-entered crag index, marked editorial: the 8 crags named publicly by the guide's authors, geocoded against the município polygons and rejected if a coordinate falls outside its município. Route counts, styles and grades stay empty until they are read off the printed guide. theCrag rejected after a live check: its API is closed to non-commercial applications (a key requires a signed agreement) and its data is CC BY-NC-SA. OpenStreetMap rejected: 4 unnamed climbing features in the whole state | editorial |
+| Mobilidade | OpenStreetMap via Overpass: federal and state highways (BR-230, BR-101, BR-104, BR-361, BR-412, PB roads), the CBTU João Pessoa to Cabedelo line and stations, bus terminals | frozen |
+
+Água
+
+| Layer | Source | Cadence |
+| --- | --- | --- |
+| Açudes | AESA (Agência Executiva de Gestão das Águas da Paraíba) SEIRA JSON API (seira.aesa.pb.gov.br/api): 186 reservoirs, 131 monitored, with capacity, coordinates, IBGE município code and a per-reservoir history resource. The legacy site2 volume table stopped updating in 2017. The API throttles aggressively, so the fetcher backs off and caches | weekly |
+| Chuvas | AESA SEIRA API: 181 SUDENE rain posts with coordinates and a pluviometria query per post and date range | weekly |
+| Clima | Open-Meteo (ERA5) monthly temperature, precipitation and sunshine duration on an H3 grid, 10-year normals. NSRDB is US-only and does not apply | frozen |
+| Saneamento | SINISA 2024 (national sanitation information system, Ministério das Cidades) municipal spreadsheets: water indicators for 214 PB municípios, sewer indicators for 74 | frozen |
+
+Gente
+
+| Layer | Source | Cadence |
+| --- | --- | --- |
+| Censo | IBGE Censo 2022 via SIDRA aggregates API: population (4709), age groups (9514), cor/raça (9605), mean household income per capita (10295), tenure (9929), residents per household (9922), internet (9936). Water and sewer are not in any município-level census table and come from SINISA | frozen |
+| Pobreza | CadÚnico (Ministério do Desenvolvimento Social): families below the poverty line per município | frozen |
+| Preços de moradia | FipeZap price per m² for João Pessoa as a time series. Censo 2022 published no rent value (none of the 1,388 census aggregates carries aluguel). No listing scraping | frozen |
+| Criminalidade | SINESP (Ministério da Justiça) monthly occurrences per município per 100k; homicide rate from SIM (Sistema de Informações sobre Mortalidade) via Atlas da Violência / Base dos Dados | frozen |
+| Escolas | INEP IDEB per município and per school; Censo Escolar school coordinates | frozen |
+| Saúde | DataSUS CNES establishments per 10k inhabitants; SIM/SINASC infant mortality | frozen |
+| Economia e conectividade | IBGE PIB dos Municípios; Anatel broadband and mobile coverage; IDHM (Atlas Brasil) | frozen |
+
+Climbing: the crag index is metadata only (name, município, coordinates, route count, styles, grade range, link to the guide), no route topos. Every coordinate records which source produced it and at what precision, and a crag that cannot be placed ships without geometry rather than with a guessed point. OpenBeta rejected for coverage (8 climbs in all of Brazil).
+
+Soils: the 1972 legend predates SiBCS, the Brazilian soil classification system adopted in 1999, so every class carries its modern name, the original legend string and a plain-Portuguese explanation. The correlation is sourced to the SiBCS 5th edition rather than inferred. Two of 22 classes cannot be correlated from the legend alone and are marked unconfirmed with the reason shown in the legend.
+
+Aquifer productivity: the SGB service stores a class code, not a flow rate. The bands come from CPRM's Manual de Cartografia Hidrogeológica. Paraíba uses only classes 3 to 6, and 96% of the state's area sits below 10 m3/h.
+
+Housing: CaliVibe's median home value has no official equivalent outside João Pessoa. Census housing conditions carry the layer statewide; FipeZap adds price for the one city with an official series.
+
+## Consequences
+
+- Spikes run 2026-09-03 with live calls settled the open items: rent is absent from the census, bairro geometry exists, theCrag is closed, SIAGAS and the geologic map are reachable through ArcGIS REST, AESA has a JSON API.
+- The SEIRA API is the fragile piece: undocumented, throttled, and its history endpoint timed out during the spike. ADR 0004 covers failure handling.
+- Human-readable source list and reproduction commands live in `docs/SOURCES.md`.

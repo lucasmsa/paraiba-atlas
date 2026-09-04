@@ -1,0 +1,241 @@
+{
+  "solos": {
+    "AM": {
+      "legenda_1972": "Assoc. AREIAS QUARTZOSAS MARINHAS DISTROFICAS E EUTROF.",
+      "sibcs": "NEOSSOLO QUARTZARÊNICO (ordem Neossolo, subordem Quartzarênico)",
+      "explicacao": "Areia de praia e restinga, quase toda de quartzo, até pelo menos 1,5 m de profundidade. A água atravessa e some: não retém quase nada, e o pouco nutriente que existe some junto.",
+      "confirmado": true,
+      "fonte": "Embrapa (2018), Sistema Brasileiro de Classificação de Solos, 5. ed., Cap. 3, campo “Abrangência” de cada ordem."
+    },
+    "AMd": {
+      "legenda_1972": "AREIAS QUARTZOSAS MARINHAS DISTROFICAS (DUNAS)",
+      "sibcs": "NEOSSOLO QUARTZARÊNICO Órtico (dunas)",
+      "explicacao": "A duna viva do litoral: areia solta e pobre, que escoa entre os dedos e não segura água nem raiz. Só vegetação adaptada se fixa.",
+      "confirmado": true,
+      "fonte": "Embrapa (2018), Sistema Brasileiro de Classificação de Solos, 5. ed., Cap. 3, campo “Abrangência” de cada ordem."
+    },
+    "AQd": {
+      "legenda_1972": "Assoc. AREIAS QUARTZOSAS DISTROFICAS",
+      "sibcs": "NEOSSOLO QUARTZARÊNICO Distrófico",
+      "explicacao": "Solo fundo mas totalmente arenoso e pobre em nutrientes. Chove e a água desce rápido demais para a planta aproveitar, então seca poucos dias depois da chuva.",
+      "confirmado": true,
+      "fonte": "Embrapa (2018), Sistema Brasileiro de Classificação de Solos, 5. ed., Cap. 3, campo “Abrangência” de cada ordem."
+    },
+    "Ae": {
+      "legenda_1972": "SOLOS ALUVIAIS EUTROFICOS",
+      "sibcs": "NEOSSOLO FLÚVICO Eutrófico",
+      "explicacao": "Terra depositada pelo rio nas várzeas, em camadas, funda e fértil. Guarda umidade bem depois que o rio baixa, o que faz dela a melhor terra de plantação do sertão.",
+      "confirmado": true,
+      "fonte": "Embrapa (2018), Sistema Brasileiro de Classificação de Solos, 5. ed., Cap. 3, campo “Abrangência” de cada ordem."
+    },
+    "Ag": {
+      "legenda_1972": "Agua",
+      "sibcs": "Não é solo: espelho d'água mapeado.",
+      "explicacao": "Superfície de água (açude, rio ou lagoa) delimitada no mapa, não uma classe de solo.",
+      "confirmado": true,
+      "fonte": "Embrapa (1972), Mapa exploratório - reconhecimento de solos do estado da Paraíba (legenda do mapa)."
+    },
+    "Ce": {
+      "legenda_1972": "Assoc. CAMBISOL EUTROFICO latossolico",
+      "sibcs": "CAMBISSOLO HÁPLICO Eutrófico",
+      "explicacao": "Solo jovem, de espessura mediana, ainda com pedaços da rocha de origem no meio. Fértil, mas raso demais para segurar muita água e sujeito a erodir na encosta.",
+      "confirmado": true,
+      "fonte": "Embrapa (2018), Sistema Brasileiro de Classificação de Solos, 5. ed., Cap. 3, campo “Abrangência” de cada ordem."
+    },
+    "HGd": {
+      "legenda_1972": "Assoc. SOLOS GLEY DISTROFICOS INDISCRIMINADOS",
+      "sibcs": "GLEISSOLO Distrófico",
+      "explicacao": "Solo de brejo, encharcado boa parte do ano, cinzento e pegajoso por falta de ar. Guarda água demais: o problema aqui é drenar, não irrigar.",
+      "confirmado": true,
+      "fonte": "Embrapa (2018), Sistema Brasileiro de Classificação de Solos, 5. ed., Cap. 3, campo “Abrangência” de cada ordem."
+    },
+    "HP": {
+      "legenda_1972": "Assoc. PODZOL HIDROMORFICO",
+      "sibcs": "ESPODOSSOLO (ordem Espodossolo)",
+      "explicacao": "Solo arenoso e encharcado do litoral, com uma camada escura endurecida logo abaixo que trava a drenagem. Alaga por cima e é pobre por baixo.",
+      "confirmado": true,
+      "fonte": "Embrapa (2018), Sistema Brasileiro de Classificação de Solos, 5. ed., Cap. 3, campo “Abrangência” de cada ordem."
+    },
+    "LVd": {
+      "legenda_1972": "LATOSOL VERMELHO-AMARELO Distrofico",
+      "sibcs": "LATOSSOLO VERMELHO-AMARELO Distrófico",
+      "explicacao": "Solo muito fundo, antigo e bem drenado, fácil de trabalhar e uniforme. É ácido e pobre de nutrientes, então rende com corretivo e adubação.",
+      "confirmado": true,
+      "fonte": "Embrapa (2018), Sistema Brasileiro de Classificação de Solos, 5. ed., Cap. 3, campo “Abrangência” de cada ordem."
+    },
+    "LVe": {
+      "legenda_1972": "LATOSOL VERMELHO-AMARELO Eutrofico",
+      "sibcs": "LATOSSOLO VERMELHO-AMARELO Eutrófico",
+      "explicacao": "Mesmo solo fundo e bem drenado do anterior, porém naturalmente fértil. Por ser profundo, armazena bastante água e atravessa melhor os veranicos.",
+      "confirmado": true,
+      "fonte": "Embrapa (2018), Sistema Brasileiro de Classificação de Solos, 5. ed., Cap. 3, campo “Abrangência” de cada ordem."
+    },
+    "NC": {
+      "legenda_1972": "Assoc. BRUNO NAO CALCICO",
+      "sibcs": "LUVISSOLO CRÔMICO (ordem Luvissolo, subordem Crômico)",
+      "explicacao": "O solo clássico da caatinga: raso, fértil, com uma camada de argila logo abaixo que a água custa a atravessar. Enche e seca depressa, e por ser raso guarda pouca água para a estiagem.",
+      "confirmado": true,
+      "fonte": "Embrapa (2018), Sistema Brasileiro de Classificação de Solos, 5. ed., Cap. 3, campo “Abrangência” de cada ordem."
+    },
+    "PE": {
+      "legenda_1972": "Assoc. PODZOLICO VERMELHO-AMARELO EQUIVALENTE EUTROFICO",
+      "sibcs": "ARGISSOLO VERMELHO-AMARELO Eutrófico, ou LUVISSOLO se a argila for de atividade alta",
+      "explicacao": "Solo de meia encosta com camada de argila acumulada no subsolo e boa fertilidade natural. A argila segura água, mas também faz a chuva escorrer por cima em vez de infiltrar.",
+      "confirmado": false,
+      "fonte": "Embrapa (2018), Sistema Brasileiro de Classificação de Solos, 5. ed., Cap. 3, campo “Abrangência” de cada ordem.",
+      "ressalva": "O termo de 1972 “Equivalente Eutrófico” indica alta saturação por bases, mas não informa a atividade da argila. O SiBCS manda os Podzólicos Vermelho-Amarelos Eutróficos com argila de atividade ALTA para LUVISSOLO e os demais para ARGISSOLO. A legenda do mapa não traz esse dado, então a ordem não pode ser fixada sem o perfil."
+    },
+    "PL": {
+      "legenda_1972": "Assoc. PLANOSOL SOLODICO",
+      "sibcs": "PLANOSSOLO (Háplico solódico, ou Nátrico se o sódio for alto)",
+      "explicacao": "Solo de baixada com uma camada superficial mais leve sobre um subsolo adensado e quase impermeável. Alaga na chuva, endurece e racha na seca, e tem sódio o bastante para atrapalhar a planta.",
+      "confirmado": true,
+      "fonte": "Embrapa (2018), Sistema Brasileiro de Classificação de Solos, 5. ed., Cap. 3, campo “Abrangência” de cada ordem."
+    },
+    "PV": {
+      "legenda_1972": "Assoc. PODZOLICO VERMELHO-AMARELO",
+      "sibcs": "ARGISSOLO VERMELHO-AMARELO",
+      "explicacao": "Solo profundo com nítida camada de argila no subsolo. Retém água razoavelmente, mas o contraste entre a camada de cima e a de baixo favorece erosão quando fica descoberto.",
+      "confirmado": true,
+      "fonte": "Embrapa (2018), Sistema Brasileiro de Classificação de Solos, 5. ed., Cap. 3, campo “Abrangência” de cada ordem."
+    },
+    "REd": {
+      "legenda_1972": "REGOSOL DISTROFICO",
+      "sibcs": "NEOSSOLO REGOLÍTICO Distrófico",
+      "explicacao": "Solo arenoso pouco desenvolvido, com mais de meio metro até a rocha e minerais ainda por decompor. Drena rápido, guarda pouca água e é pobre em nutrientes.",
+      "confirmado": true,
+      "fonte": "Embrapa (2018), Sistema Brasileiro de Classificação de Solos, 5. ed., Cap. 3, campo “Abrangência” de cada ordem."
+    },
+    "REe": {
+      "legenda_1972": "Assoc. REGOSOL EUTROFICO com fragipan",
+      "sibcs": "NEOSSOLO REGOLÍTICO Eutrófico",
+      "explicacao": "Solo arenoso raso a mediano, fértil, mas com uma camada endurecida no subsolo que trava a raiz e a infiltração. É o solo das “aréias” do agreste, muito usado para mandioca.",
+      "confirmado": true,
+      "fonte": "Embrapa (2018), Sistema Brasileiro de Classificação de Solos, 5. ed., Cap. 3, campo “Abrangência” de cada ordem."
+    },
+    "Re": {
+      "legenda_1972": "Assoc. SOLOS LITOLICOS EUTROFICOS com A fraco",
+      "sibcs": "NEOSSOLO LITÓLICO Eutrófico",
+      "explicacao": "Rocha a menos de meio metro da superfície, com uma casca fina de terra por cima. Fértil no papel, mas tão raso que praticamente não estoca água: a chuva escorre e a estiagem chega em dias.",
+      "confirmado": true,
+      "fonte": "Embrapa (2018), Sistema Brasileiro de Classificação de Solos, 5. ed., Cap. 3, campo “Abrangência” de cada ordem."
+    },
+    "SM": {
+      "legenda_1972": "SOLOS INDISCRIMINADOS DE MANGUE",
+      "sibcs": "GLEISSOLO TIOMÓRFICO / SÁLICO, predominantemente",
+      "explicacao": "Lama salgada de mangue, sempre encharcada pela maré e sem oxigênio. Não é terra de plantio: é berçário de peixe e barreira contra a maré.",
+      "confirmado": false,
+      "fonte": "Embrapa (2018), Sistema Brasileiro de Classificação de Solos, 5. ed., Cap. 3, campo “Abrangência” de cada ordem.",
+      "ressalva": "“Solos Indiscriminados de Mangue” é unidade de mapeamento, não classe taxonômica: agrega solos distintos sem separá-los. O SiBCS só nomeia o antigo “Glei Tiomórfico” dentro dos Gleissolos, o que cobre a maior parte da unidade mas não toda ela."
+    },
+    "SS": {
+      "legenda_1972": "Assoc. SOLONETZ SOLODIZADO",
+      "sibcs": "PLANOSSOLO NÁTRICO",
+      "explicacao": "Solo salinizado por sódio, de subsolo compacto e escuro que a água quase não penetra. O sódio desmancha a estrutura e envenena a raiz: dos piores solos do estado para agricultura.",
+      "confirmado": true,
+      "fonte": "Embrapa (2018), Sistema Brasileiro de Classificação de Solos, 5. ed., Cap. 3, campo “Abrangência” de cada ordem."
+    },
+    "TRe": {
+      "legenda_1972": "Assoc. TERRA ROXA ESTRUTURADA EUTROFICA",
+      "sibcs": "NITOSSOLO VERMELHO Eutrófico",
+      "explicacao": "Solo argiloso, profundo, vermelho e naturalmente fértil, de estrutura bem formada. Segura bastante água e é dos melhores para lavoura, mas ocupa área pequena.",
+      "confirmado": true,
+      "fonte": "Embrapa (2018), Sistema Brasileiro de Classificação de Solos, 5. ed., Cap. 3, campo “Abrangência” de cada ordem."
+    },
+    "Urb": {
+      "legenda_1972": "Area Urbana",
+      "sibcs": "Não é solo: mancha urbana mapeada.",
+      "explicacao": "Área construída delimitada no mapa, onde o solo original está coberto ou revolvido.",
+      "confirmado": true,
+      "fonte": "Embrapa (1972), Mapa exploratório - reconhecimento de solos do estado da Paraíba (legenda do mapa)."
+    },
+    "V": {
+      "legenda_1972": "Assoc. Vertisol",
+      "sibcs": "VERTISSOLO (ordem Vertissolo)",
+      "explicacao": "Solo de argila que incha na chuva e encolhe na seca, abrindo fendas fundas no chão. Encharca quando molhado e vira pedra quando seca, com uma janela curta para arar.",
+      "confirmado": true,
+      "fonte": "Embrapa (2018), Sistema Brasileiro de Classificação de Solos, 5. ed., Cap. 3, campo “Abrangência” de cada ordem."
+    }
+  },
+  "aquiferos_produtividade": {
+    "1": {
+      "faixa": "≥ 100 m³/h",
+      "produtividade": "Muito Alta",
+      "explicacao": "Poço capaz de abastecer cidade inteira ou irrigação de grande porte.",
+      "confirmado": true,
+      "fonte": "Diniz, J. A. O. et al. (2014), Manual de Cartografia Hidrogeológica, CPRM/SGB, Tabela 10 e Anexo 1 (adaptado de Struckmeier & Margat, 1995)."
+    },
+    "2": {
+      "faixa": "50 a 100 m³/h",
+      "produtividade": "Alta",
+      "explicacao": "Bom aquífero pelo padrão nacional, suficiente para abastecimento público.",
+      "confirmado": true,
+      "fonte": "Diniz, J. A. O. et al. (2014), Manual de Cartografia Hidrogeológica, CPRM/SGB, Tabela 10 e Anexo 1 (adaptado de Struckmeier & Margat, 1995)."
+    },
+    "3": {
+      "faixa": "25 a 50 m³/h",
+      "produtividade": "Moderada",
+      "explicacao": "Dá para abastecer uma comunidade pequena e irrigar área restrita.",
+      "confirmado": true,
+      "fonte": "Diniz, J. A. O. et al. (2014), Manual de Cartografia Hidrogeológica, CPRM/SGB, Tabela 10 e Anexo 1 (adaptado de Struckmeier & Margat, 1995)."
+    },
+    "4": {
+      "faixa": "10 a 25 m³/h",
+      "produtividade": "Geralmente baixa, porém localmente moderada",
+      "explicacao": "Serve para abastecimento local ou consumo de uma propriedade.",
+      "confirmado": true,
+      "fonte": "Diniz, J. A. O. et al. (2014), Manual de Cartografia Hidrogeológica, CPRM/SGB, Tabela 10 e Anexo 1 (adaptado de Struckmeier & Margat, 1995)."
+    },
+    "5": {
+      "faixa": "1 a 10 m³/h",
+      "produtividade": "Geralmente muito baixa, porém localmente baixa",
+      "explicacao": "Fornecimento contínuo dificilmente é garantido: o poço pode secar no uso.",
+      "confirmado": true,
+      "fonte": "Diniz, J. A. O. et al. (2014), Manual de Cartografia Hidrogeológica, CPRM/SGB, Tabela 10 e Anexo 1 (adaptado de Struckmeier & Margat, 1995)."
+    },
+    "6": {
+      "faixa": "< 1 m³/h",
+      "produtividade": "Pouco Produtiva ou Não Aquífera",
+      "explicacao": "Praticamente não se tira água: vazão nula ou insuficiente até para uma casa.",
+      "confirmado": true,
+      "fonte": "Diniz, J. A. O. et al. (2014), Manual de Cartografia Hidrogeológica, CPRM/SGB, Tabela 10 e Anexo 1 (adaptado de Struckmeier & Margat, 1995)."
+    },
+    "7": {
+      "faixa": "Não se aplica",
+      "produtividade": "Não se aplica",
+      "explicacao": "Sem unidade hidroestratigráfica correspondente.",
+      "confirmado": true,
+      "fonte": "Diniz, J. A. O. et al. (2014), Manual de Cartografia Hidrogeológica, CPRM/SGB, Tabela 10 e Anexo 1 (adaptado de Struckmeier & Margat, 1995)."
+    },
+    "_nota": "Os campos Q_HE_AFL, PROD_HE_AFL e CL_HE_AFL guardam o código da classe (1 a 7), não o valor. Na Paraíba ocorrem apenas as classes 3, 4, 5 e 6."
+  },
+  "dominios": {
+    "Gr": {
+      "nome": "Granular",
+      "confirmado": true,
+      "fonte": "Diniz, J. A. O. et al. (2014), Manual de Cartografia Hidrogeológica, CPRM/SGB, Tabela 10 e Anexo 1 (adaptado de Struckmeier & Margat, 1995).",
+      "definicao": "Unidades em que a água se acumula nos poros da rocha e circula por eles. Ocorrem em rochas sedimentares consolidadas, sedimentos não consolidados e materiais arenosos decompostos.",
+      "explicacao": "Água guardada entre os grãos, como numa esponja de areia. São os aquíferos mais contínuos e previsíveis: cavar em quase qualquer ponto acha água."
+    },
+    "Fr": {
+      "nome": "Fraturada",
+      "confirmado": true,
+      "fonte": "Diniz, J. A. O. et al. (2014), Manual de Cartografia Hidrogeológica, CPRM/SGB, Tabela 10 e Anexo 1 (adaptado de Struckmeier & Margat, 1995).",
+      "definicao": "Unidades com porosidade secundária originada do fraturamento ou falhamento das rochas, em rochas ígneas, metamórficas e algumas sedimentares fortemente cimentadas. São unidades restritas, descontínuas e localizadas.",
+      "explicacao": "Água só nas rachaduras da rocha. É o caso da maior parte da Paraíba: cada fenda é um aquífero próprio, então um poço pode dar água e outro a cem metros não dar nada."
+    },
+    "K": {
+      "nome": "Cárstica",
+      "confirmado": true,
+      "fonte": "Diniz, J. A. O. et al. (2014), Manual de Cartografia Hidrogeológica, CPRM/SGB, Tabela 10 e Anexo 1 (adaptado de Struckmeier & Margat, 1995).",
+      "definicao": "Tipo particular de unidade fraturada, originada da dissolução pela água de rochas carbonáticas como calcários, dolomita e gipsita, com feições como cavernas e dolinas.",
+      "explicacao": "A água dissolveu o calcário e abriu condutos por dentro da rocha. O fluxo é imprevisível e corre rápido, como um rio subterrâneo."
+    }
+  },
+  "fontes": [
+    "Embrapa (2018). Sistema Brasileiro de Classificação de Solos. 5. ed. rev. e ampl. Brasília: Embrapa. ISBN 978-85-7035-800-4. Capítulo 3, campo “Abrangência” de cada ordem. https://www.agroapi.cnptia.embrapa.br/portal/assets/docs/SiBCS-2018-ISBN-9788570358004.pdf",
+    "Embrapa (1972). Mapa exploratório - reconhecimento de solos do estado da Paraíba, 1:500.000 (legenda original das unidades).",
+    "Diniz, J. A. O.; Monteiro, A. B.; Silva, R. C.; Paula, T. L. F. (2014). Manual de Cartografia Hidrogeológica. Recife: CPRM/SGB. Tabela 10 e Anexo 1. https://rigeo.sgb.gov.br/bitstream/doc/16587/3/manual_cartografia_hidrogeologica.pdf",
+    "Struckmeier, W. F.; Margat, J. (1995). Hydrogeological Maps: a guide and a standard legend. IAH. Base da tabela de classes adotada pelo CPRM/SGB."
+  ]
+}

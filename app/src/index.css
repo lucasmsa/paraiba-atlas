@@ -1,0 +1,57 @@
+@import "tailwindcss";
+
+@theme {
+  --color-papel: #f3e8d2;
+  --color-papel-fundo: #e7d9bd;
+  --color-tinta: #17120e;
+  --color-tinta-fraca: #4a3f33;
+  --color-terra: #8a4b12;
+  --color-agua: #1e5f66;
+  --color-gente: #9b2f1f;
+
+  --font-display: "Ultra", Georgia, serif;
+  --font-body: "Spectral", Georgia, serif;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  background: var(--color-papel-fundo);
+  color: var(--color-tinta);
+  font-family: var(--font-body);
+}
+
+/* Grain belongs to the chrome only. Data surfaces stay flat so the ramps read true. */
+.cordel-papel {
+  background-color: var(--color-papel);
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/></filter><rect width='120' height='120' filter='url(%23n)' opacity='0.16'/></svg>");
+}
+
+.cordel-bloco {
+  border: 3px solid var(--color-tinta);
+  background-color: var(--color-papel);
+}
+
+.cordel-sombra {
+  box-shadow: 6px 6px 0 var(--color-tinta);
+}
+
+.cordel-sombra-leve {
+  box-shadow: 4px 4px 0 var(--color-tinta);
+}
+
+.cordel-aba {
+  clip-path: polygon(0 0, 100% 0, 100% 78%, 88% 100%, 0 100%);
+}
+
+.cordel-titulo {
+  font-family: var(--font-display);
+  font-weight: 400;
+  text-transform: uppercase;
+  line-height: 0.95;
+}

@@ -1,0 +1,24 @@
+[project]
+name = "paraiba-atlas-pipeline"
+version = "0.1.0"
+description = "Fetches, joins and emits the Atlas da Paraíba data contract"
+authors = [
+    { name = "Lucas Moreira", email = "lucasmsea@outlook.com" }
+]
+requires-python = ">=3.12"
+dependencies = [
+    "geopandas>=1.1.4",
+    "h3>=4.5.0",
+    "openpyxl>=3.1.5",
+    "pandas>=3.0.5",
+    "pyogrio>=0.13.0",
+    "requests>=2.34.2",
+    "shapely>=2.1.2",
+]
+
+[project.scripts]
+atlas = "paraiba_atlas_pipeline.cli:main"
+
+[build-system]
+requires = ["uv_build>=0.12.1,<0.13.0"]
+build-backend = "uv_build"
