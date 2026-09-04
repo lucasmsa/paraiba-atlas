@@ -109,7 +109,7 @@
     },
     "terra.picos": {
       "source": "OpenStreetMap via Overpass API",
-      "source_url": "https://overpass.kumi.systems/api/interpreter",
+      "source_url": "https://overpass-api.de/api/interpreter",
       "year": 2026,
       "year_note": "OSM data as of 2026-07-24T14:49:51Z",
       "rows": 343,
@@ -159,5 +159,5 @@
       "path": "gente/mortalidade_infantil.json"
     }
   },
-  "generated_at": "2026-09-04T20:00:37+00:00"
+  "generated_at": "2026-09-04T20:06:39+00:00"
 }
