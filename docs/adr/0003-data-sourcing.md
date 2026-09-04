@@ -29,7 +29,7 @@ Terra
 
 | Layer | Source | Cadence |
 | --- | --- | --- |
-| Açudes | AESA (Agência Executiva de Gestão das Águas da Paraíba) SEIRA JSON API (seira.aesa.pb.gov.br/api): 186 reservoirs, 131 monitored, with capacity, coordinates, IBGE município code and a per-reservoir history resource. The legacy site2 volume table stopped updating in 2017. The API throttles aggressively, so the fetcher backs off and caches | weekly |
+| Açudes | Two sources joined. AESA's SEIRA JSON API gives the register: 186 reservoirs, 131 monitored, with coordinates and IBGE município code. ANA's SAR (Sistema de Acompanhamento de Reservatórios, www.ana.gov.br/sar0/Medicao) gives the volumes: 126 Paraíba reservoirs, daily readings from 2013 to today, capacity, cota, volume in hm3 and percent full, over plain GET with no auth | weekly |
 | Chuvas | AESA SEIRA API: 181 SUDENE rain posts with coordinates and a pluviometria query per post and date range | weekly |
 | Clima | Open-Meteo (ERA5) monthly temperature, precipitation and sunshine duration on an H3 grid, 10-year normals. NSRDB is US-only and does not apply | frozen |
 | Saneamento | SINISA 2024 (national sanitation information system, Ministério das Cidades) municipal spreadsheets: water indicators for 214 PB municípios, sewer indicators for 74 | frozen |
@@ -57,5 +57,7 @@ Housing: CaliVibe's median home value has no official equivalent outside João P
 ## Consequences
 
 - Spikes run 2026-09-03 with live calls settled the open items: rent is absent from the census, bairro geometry exists, theCrag is closed, SIAGAS and the geologic map are reachable through ArcGIS REST, AESA has a JSON API.
-- The SEIRA API is the fragile piece: undocumented, throttled, and its history endpoint timed out during the spike. ADR 0004 covers failure handling.
+- SEIRA supplies the register, ANA's SAR supplies the volumes. SEIRA's own volume and history endpoints return 401 for anonymous requests, verified across five paths, and the public table it replaced stopped updating in 2017, so SEIRA alone cannot answer how full a reservoir is.
+- SAR has no bulk query, so the volume fetch is one request per reservoir. Raw responses are cached before parsing, so a later outage costs nothing.
+- SAR asserts no licence on its pages. It is cited as ANA/SAR with the retrieval date rather than under a claimed licence.
 - Human-readable source list and reproduction commands live in `docs/SOURCES.md`.

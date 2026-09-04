@@ -37,7 +37,7 @@ refresh of that source.
 | `geossitios` | Geossítios | SGB GEOSSIT, public record pages | fetch year |
 | `picos` | Picos e serras | OpenStreetMap via Overpass | fetch year |
 | `escalada` | Escalada | Editorial index; names from the Guia de Escalada na Paraíba, coordinates from escaladas.com.br and OSM | 2023 |
-| `acudes` | Açudes | AESA SEIRA API, `/reservatorio` | fetch year |
+| `acudes` | Açudes | Register from AESA SEIRA API `/reservatorio`; volumes and history from ANA SAR | 2013 to date |
 | `chuvas` | Postos de chuva | AESA SEIRA API, `/posto-sudene` | fetch year |
 | `clima` | Clima | Open-Meteo historical archive (ERA5) on an H3 grid | 2014-2023 |
 | `saneamento` | Rede de água, rede de esgoto | SINISA 2024, Ministério das Cidades | 2024 |
@@ -55,10 +55,16 @@ is in [ADR 0003](adr/0003-data-sourcing.md). Refresh rules are in
 These are recorded here so nobody re-investigates them. Each was checked with
 live requests.
 
-- **Reservoir volumes.** AESA's SEIRA API returns 401 on every volume and
-  history endpoint for anonymous requests (`/periodos`, `/periodo`,
-  `/monitoramento`, `/volume`, `/estacao`). The public table it replaced stopped
-  updating in 2017. The layer ships capacity without fill level.
+- **AESA's own volume endpoints.** SEIRA returns 401 on every volume and
+  history path for anonymous requests (`/periodos`, `/periodo`,
+  `/monitoramento`, `/volume`, `/estacao`), and the public table it replaced
+  stopped updating in 2017. Volumes come from ANA's SAR instead, so this is a
+  closed dead end rather than a gap in the atlas.
+- **SAR access paths that do not work**, so nobody retries them: `/sar0/Nordeste`
+  renders client-side and its `Nordeste/CarregaMapa` POST returns 500 without
+  session state, `/sar0/Medicao/ExportarExcel` returns 500, and dados.gov.br's
+  API returns 401. There is no bulk query, so the fetch is one request per
+  reservoir.
 - **Rainfall readings.** Same API, same restriction. The layer shows where
   measurement happens, not how much fell.
 - **Rent and property prices.** The 2022 census published no rent value; none of
