@@ -45,6 +45,10 @@ refresh of that source.
 | `renda` | Renda per capita | IBGE Censo 2022, SIDRA 10295 | 2022 |
 | `moradores` | Moradores por domicílio | IBGE Censo 2022, SIDRA 9922 | 2022 |
 | `idade` | Idade mediana, envelhecimento | IBGE Censo 2022, SIDRA 9756 | 2022 |
+| `crime` | Homicídios | Ministério da Saúde, SIM via DataSUS TabNet | 2024 |
+| `escolas` | IDEB anos iniciais e finais | INEP, IDEB | 2023 |
+| `saude` | Postos e hospitais, mortalidade infantil | Ministério da Saúde, CNES and SIM/SINASC | 2019-2026 |
+| `economia` | PIB per capita, IDHM, banda larga | IBGE, Atlas Brasil, Anatel | 2010-2026 |
 
 Full sourcing rationale, including sources that were evaluated and rejected,
 is in [ADR 0003](adr/0003-data-sourcing.md). Refresh rules are in
@@ -80,6 +84,17 @@ live requests.
   geometry rather than with a guessed point.
 - **Two soil classes without a confirmed modern name.** PE and SM cannot be
   correlated to SiBCS from the 1972 legend alone. Both say so in the legend.
+- **SINESP police occurrences.** `dados.mj.gov.br` refuses connections on every
+  path including its CKAN API, and the dados.gov.br mirror serves an empty page
+  shell. Violence is covered by the mortality registry instead, which is more
+  reliable at município level anyway, since a death always generates a record.
+- **School coordinates from INEP.** The Censo Escolar microdata has no latitude
+  or longitude column in any year checked, 426 columns in 2024 and 370 in 2021,
+  and the catálogo de escolas and geolocalização paths both 404. School points
+  come from OpenStreetMap, which is contributor-driven and uneven.
+- **Atlas da Violência as an intermediary.** IPEA's API returns 404 on every
+  path and its front end is a bundle with no discoverable endpoint. The
+  mortality registry is read directly instead.
 - **Open-Meteo quota.** The climate step makes one request per H3 cell across
   ten years and five variables, and the hourly cap allows roughly 39 cells per
   window. It resumes from cache, so it needs several windows on a cold start.

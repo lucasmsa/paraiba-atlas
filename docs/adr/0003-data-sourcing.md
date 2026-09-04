@@ -41,14 +41,16 @@ Gente
 | Censo | IBGE Censo 2022 via SIDRA aggregates API: population (4709), age groups (9514), cor/raça (9605), mean household income per capita (10295), tenure (9929), residents per household (9922), internet (9936). Water and sewer are not in any município-level census table and come from SINISA | frozen |
 | Pobreza | CadÚnico (Ministério do Desenvolvimento Social): families below the poverty line per município | frozen |
 | Preços de moradia | FipeZap price per m² for João Pessoa as a time series. Censo 2022 published no rent value (none of the 1,388 census aggregates carries aluguel). No listing scraping | frozen |
-| Criminalidade | SINESP (Ministério da Justiça) monthly occurrences per município per 100k; homicide rate from SIM (Sistema de Informações sobre Mortalidade) via Atlas da Violência / Base dos Dados | frozen |
-| Escolas | INEP IDEB per município and per school; Censo Escolar school coordinates | frozen |
+| Criminalidade | Homicide rate from SIM (Sistema de Informações sobre Mortalidade) read directly from DataSUS TabNet, external-causes table, CID-10 group X85-Y09. SINESP dropped: dados.mj.gov.br refuses connections on every path including its CKAN API, and the dados.gov.br mirror serves an empty shell. Atlas da Violência dropped as intermediary: IPEA's API returns 404 on every path | frozen |
+| Escolas | IDEB per município, anos iniciais and anos finais of the rede pública, from INEP. School points from OpenStreetMap via Overpass, because the Censo Escolar microdata carries no coordinate column at all and INEP's catálogo de escolas and geolocalização paths both 404 | frozen |
 | Saúde | DataSUS CNES establishments per 10k inhabitants; SIM/SINASC infant mortality | frozen |
 | Economia e conectividade | IBGE PIB dos Municípios; Anatel broadband and mobile coverage; IDHM (Atlas Brasil) | frozen |
 
 Climbing: the crag index is metadata only (name, município, coordinates, route count, styles, grade range, link to the guide), no route topos. Every coordinate records which source produced it and at what precision, and a crag that cannot be placed ships without geometry rather than with a guessed point. OpenBeta rejected for coverage (8 climbs in all of Brazil).
 
 Soils: the 1972 legend predates SiBCS, the Brazilian soil classification system adopted in 1999, so every class carries its modern name, the original legend string and a plain-Portuguese explanation. The correlation is sourced to the SiBCS 5th edition rather than inferred. Two of 22 classes cannot be correlated from the legend alone and are marked unconfirmed with the reason shown in the legend.
+
+Schools: the point layer changed source mid-build. This ADR originally assumed Censo Escolar carried coordinates; it does not, in any year checked. OpenStreetMap is the only reachable source, and it is contributor-driven rather than a census, so coverage is uneven and denser in the two big cities. The layer says so, and absence of a point is not evidence of absence of a school.
 
 Aquifer productivity: the SGB service stores a class code, not a flow rate. The bands come from CPRM's Manual de Cartografia Hidrogeológica. Paraíba uses only classes 3 to 6, and 96% of the state's area sits below 10 m3/h.
 
