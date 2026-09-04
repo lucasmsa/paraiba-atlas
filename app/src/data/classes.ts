@@ -10,7 +10,8 @@ export interface ClassLabel {
   legenda_1972?: string
   faixa?: string
   nome?: string
-  explicacao: string
+  explicacao?: string
+  definicao?: string
   confirmado?: boolean
   ressalva?: string
   fonte?: string

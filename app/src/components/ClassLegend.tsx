@@ -1,5 +1,5 @@
 import type { ClassEntry, ClassLabel } from '../data/classes'
-import { OTHER_VALUE, primaryLabel, secondaryLabel } from '../utils/classes'
+import { explanationOf, OTHER_VALUE, primaryLabel, secondaryLabel } from '../utils/classes'
 
 interface Props {
   entries: ClassEntry[]
@@ -25,7 +25,7 @@ export function ClassLegend({ entries, colors, labels }: Props) {
                 <span className="shrink-0 text-sm tabular-nums text-tinta-fraca">{percent.format(entry.share * 100)}%</span>
               </span>
               {secondary && <span className="block text-sm text-tinta-fraca">{secondary}</span>}
-              {label?.explicacao && <span className="mt-0.5 block text-sm leading-snug text-tinta-fraca">{label.explicacao}</span>}
+              {explanationOf(label) && <span className="mt-0.5 block text-sm leading-snug text-tinta-fraca">{explanationOf(label)}</span>}
               {label?.confirmado === false && label.ressalva && (
                 <span className="mt-0.5 block text-sm leading-snug text-tinta-fraca italic">Correspondência incerta: {label.ressalva}</span>
               )}

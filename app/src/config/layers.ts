@@ -438,6 +438,26 @@ export const LAYERS: AtlasLayer[] = [
       comoLer: 'Leia como onde há escola mapeada, nunca como quantas escolas existem. O OpenStreetMap é feito por voluntários, e o mapa mostra onde alguém mapeou: 71 municípios, com 13% da população do estado, não têm um único ponto. Cuité e Cacimba de Dentro têm mais pontos que Patos, o que diz mais sobre quem mapeou do que sobre a rede de ensino.',
     },
   },
+  {
+    kind: 'categorical',
+    id: 'terra.dominios_hidro',
+    pillar: 'terra',
+    label: 'Domínio hidrogeológico',
+    geoPath: 'geo/terra/aquiferos.geojson',
+    classesPath: 'geo/terra/aquiferos_classes.json',
+    classesKey: 'dominio',
+    classField: 'dominio',
+    colors: {
+      Fr: '#a8567c',
+      Gr: '#d9a441',
+      K: '#3f7a6b',
+    },
+    card: {
+      oQueE: 'Como a rocha de cada área guarda água, em três tipos. Granular guarda entre os grãos, como uma esponja. Fraturada só guarda nas rachaduras da rocha. Cárstica guarda em cavidades dissolvidas no calcário.',
+      porQueImporta: 'É a explicação mais direta da seca paraibana. A rocha fraturada cobre 86% da área do estado, e nela um poço só dá água se acertar uma fratura, com vazão pequena e água muitas vezes salobra. As faixas granulares, que sustentariam poços de verdade, ficam nos vales e no litoral.',
+      comoLer: 'Três cores para três tipos de rocha. Repare no descompasso entre área e número de manchas: o domínio fraturado é uma massa contínua de 40 polígonos, enquanto o granular são 475 manchas estreitas ao longo dos rios. A porcentagem é da área do estado, não da contagem.',
+    },
+  },
 ]
 
 export const layerById = (id: string | null) => (id ? LAYERS.find((layer) => layer.id === id) ?? null : null)

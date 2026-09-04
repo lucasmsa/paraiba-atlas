@@ -204,7 +204,72 @@
       "license": "ODbL 1.0 (OpenStreetMap contributors)",
       "named": 695,
       "municipios_com_ponto": 152
+    },
+    "gente.cor_preta_parda": {
+      "source": "IBGE, Censo Demográfico 2022 (SIDRA 9605), cor ou raça autodeclarada",
+      "source_url": "https://servicodados.ibge.gov.br/api/v3/agregados/9605/periodos/2022/variaveis/1000093?localidades=N6[N3[25]]&classificacao=86[2777,2779]",
+      "year": 2022,
+      "rows": 223,
+      "path": "gente/cor_preta_parda.json"
+    },
+    "gente.cor_branca": {
+      "source": "IBGE, Censo Demográfico 2022 (SIDRA 9605), cor ou raça autodeclarada",
+      "source_url": "https://servicodados.ibge.gov.br/api/v3/agregados/9605/periodos/2022/variaveis/1000093?localidades=N6[N3[25]]&classificacao=86[2776]",
+      "year": 2022,
+      "rows": 223,
+      "path": "gente/cor_branca.json"
+    },
+    "gente.moradia_propria": {
+      "source": "IBGE, Censo Demográfico 2022 (SIDRA 9929), condição de ocupação do domicílio",
+      "source_url": "https://servicodados.ibge.gov.br/api/v3/agregados/9929/periodos/2022/variaveis/1000381?localidades=N6[N3[25]]&classificacao=63[73554]|1986[73103]|1988[73108]",
+      "year": 2022,
+      "rows": 223,
+      "path": "gente/moradia_propria.json"
+    },
+    "gente.moradia_alugada": {
+      "source": "IBGE, Censo Demográfico 2022 (SIDRA 9929), condição de ocupação do domicílio",
+      "source_url": "https://servicodados.ibge.gov.br/api/v3/agregados/9929/periodos/2022/variaveis/1000381?localidades=N6[N3[25]]&classificacao=63[1055]|1986[73103]|1988[73108]",
+      "year": 2022,
+      "rows": 223,
+      "path": "gente/moradia_alugada.json"
+    },
+    "gente.pobreza": {
+      "source": "MDS, CadÚnico via MI Social, situação de pobreza e extrema pobreza, 2026-08; domicílios do Censo 2022",
+      "source_url": "https://aplicacoes.mds.gov.br/sagi/servicos/misocial?q=codigo_ibge:25*&fq=anomes_s:202608&fl=codigo_ibge,cadun_qtd_familias_cadastradas_i,cadun_qtde_fam_sit_pobreza_s,cadun_qtde_fam_sit_extrema_pobreza_s,cadun_qtd_familias_cadastradas_rfpc_ate_meio_sm_i&rows=500&wt=json",
+      "year": 2026,
+      "rows": 223,
+      "path": "gente/pobreza.json"
+    },
+    "terra.rodovias": {
+      "source": "OpenStreetMap via Overpass API (highway com ref BR ou PB)",
+      "source_url": "https://overpass-api.de/api/interpreter?data=%5Bout%3Ajson%5D%5Btimeout%3A280%5D%3Barea%5B%22ISO3166-2%22%3D%22BR-PB%22%5D-%3E.pb%3Bway%5B%22highway%22~%22%5E%28motorway%7Ctrunk%7Cprimary%7Csecondary%29%24%22%5D%5B%22ref%22%5D%28area.pb%29%3Bout+geom%3B",
+      "year": 2026,
+      "year_note": "Dados do OSM em 2026-09-04T21:21:18Z. Cada rodovia é uma feição só, unindo os 6822 trechos que o OSM registra separadamente. Trechos de rodovias de estados vizinhos que cruzam a fronteira ficam de fora.",
+      "rows": 145,
+      "path": "terra/rodovias.geojson",
+      "license": "ODbL 1.0 (OpenStreetMap contributors)"
+    },
+    "terra.ferrovia": {
+      "source": "OpenStreetMap via Overpass API (rota CBTU)",
+      "source_url": "https://overpass-api.de/api/interpreter?data=%5Bout%3Ajson%5D%5Btimeout%3A180%5D%3Barea%5B%22ISO3166-2%22%3D%22BR-PB%22%5D-%3E.pb%3Brel%5B%22route%22%3D%22light_rail%22%5D%5B%22operator%22~%22CBTU%22%2Ci%5D%28area.pb%29-%3E.r%3B.r+out+geom%3Bnode%28r.r%3A%22stop%22%29-%3E.s%3B.s+out%3B",
+      "year": 2026,
+      "year_note": "Dados do OSM em 2026-09-04T21:21:18Z. É a única ferrovia de passageiros em operação na Paraíba: liga Santa Rita a Cabedelo passando por João Pessoa. Os ramais de carga da Transnordestina e as estações desativadas do interior não entram nesta camada.",
+      "rows": 14,
+      "path": "terra/ferrovia.geojson",
+      "license": "ODbL 1.0 (OpenStreetMap contributors)",
+      "km": 31.0,
+      "estacoes": 13
+    },
+    "terra.rodoviarias": {
+      "source": "OpenStreetMap via Overpass API (amenity=bus_station)",
+      "source_url": "https://overpass-api.de/api/interpreter?data=%5Bout%3Ajson%5D%5Btimeout%3A180%5D%3Barea%5B%22ISO3166-2%22%3D%22BR-PB%22%5D-%3E.pb%3B%28node%5B%22amenity%22%3D%22bus_station%22%5D%28area.pb%29%3Bway%5B%22amenity%22%3D%22bus_station%22%5D%28area.pb%29%3Brelation%5B%22amenity%22%3D%22bus_station%22%5D%28area.pb%29%3B%29%3Bout+tags+center%3B",
+      "year": 2026,
+      "year_note": "Dados do OSM em 2026-09-04T21:21:18Z. Nenhuma empresa de ônibus da Paraíba publica GTFS, o formato aberto de horários e itinerários, então não existe dado de linha nem de horário em lugar nenhum: esta camada mostra terminais como construções, nunca como rede. O mapeamento é voluntário e desigual: apenas 38 dos 223 municípios têm algum terminal mapeado, e a camada mistura rodoviárias intermunicipais com terminais de ônibus urbano, porque o OSM usa a mesma etiqueta para os dois.",
+      "rows": 68,
+      "path": "terra/rodoviarias.geojson",
+      "license": "ODbL 1.0 (OpenStreetMap contributors)",
+      "municipios_com_terminal": 38
     }
   },
-  "generated_at": "2026-09-04T21:19:12+00:00"
+  "generated_at": "2026-09-04T21:23:32+00:00"
 }

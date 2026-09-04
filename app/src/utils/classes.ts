@@ -39,6 +39,10 @@ export function primaryLabel(value: string, label: ClassLabel | undefined, other
   return label.sibcs ?? label.nome ?? label.faixa ?? value
 }
 
+export function explanationOf(label: ClassLabel | undefined): string | null {
+  return label?.explicacao ?? label?.definicao ?? null
+}
+
 export function secondaryLabel(value: string, label: ClassLabel | undefined): string | null {
   if (value === OTHER_VALUE || !label) return null
   const parts = [label.legenda_1972 ? `1972: ${label.legenda_1972}` : null, label.sibcs || label.nome ? value : null].filter(Boolean)
