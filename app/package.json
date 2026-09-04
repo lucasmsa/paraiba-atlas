@@ -7,7 +7,10 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "preview": "vite preview",
-    "typecheck": "tsc -b"
+    "typecheck": "tsc -b",
+    "sync:maplibre": "node scripts/copy-maplibre-worker.mjs",
+    "predev": "node scripts/copy-maplibre-worker.mjs",
+    "prebuild": "node scripts/copy-maplibre-worker.mjs"
   },
   "dependencies": {
     "maplibre-gl": "^6.7.0",

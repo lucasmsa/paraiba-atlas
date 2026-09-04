@@ -1,0 +1,16 @@
+import { chromium } from '@playwright/test'
+const browser = await chromium.launch()
+const page = await browser.newPage({ viewport: { width: 1440, height: 900 } })
+const errs = []
+page.on('pageerror', (e) => errs.push(String(e).slice(0, 200)))
+page.on('console', (m) => { if (m.type() === 'error') errs.push(m.text().slice(0, 200)) })
+page.on('response', (r) => { if (r.status() >= 400) errs.push(`http ${r.status()} ${r.url().slice(-50)}`) })
+await page.goto(process.argv[2], { waitUntil: 'networkidle', timeout: 60000 })
+await page.waitForTimeout(6000)
+await page.getByRole('button', { name: 'Água', exact: true }).click()
+await page.waitForTimeout(500)
+await page.getByRole('button', { name: /Açudes/ }).click()
+await page.waitForTimeout(5000)
+await page.screenshot({ path: process.argv[3] })
+console.log('errors:', JSON.stringify([...new Set(errs)].slice(0, 5)))
+await browser.close()

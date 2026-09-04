@@ -1,6 +1,11 @@
 import { useEffect, useRef, useState } from 'react'
-import { Map as MapLibreMap, NavigationControl } from 'maplibre-gl'
+import { Map as MapLibreMap, NavigationControl, setWorkerUrl } from 'maplibre-gl'
 import 'maplibre-gl/dist/maplibre-gl.css'
+// MapLibre resolves its worker through a runtime URL the bundler cannot see, so the
+// file is never emitted and the map silently fails to draw in a production build.
+// The worker and its shared chunk are copied into public/maplibre by a prebuild step,
+// which keeps them siblings so the worker's own relative import resolves.
+setWorkerUrl(`${import.meta.env.BASE_URL}maplibre/maplibre-gl-worker.mjs`)
 import { dataUrl } from '../data/contract'
 import { BASE_STYLE, HATCH_IMAGE, LAYERS, OPENING_CAMERA, PARAIBA_BOUNDS, SOURCES, TERRAIN_TILES } from './constants'
 import { hatchImage } from './hatch'
