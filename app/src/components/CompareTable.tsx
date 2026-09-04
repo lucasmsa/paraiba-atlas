@@ -27,6 +27,11 @@ export function CompareTable({ units, unitNames, loaded, onRemove, onClear }: Pr
           limpar
         </button>
       </header>
+      {units.some((unit) => unit.kind === 'meso') && (
+        <p className="text-sm leading-snug text-tinta-fraca">
+          Nas mesorregiões, contagens são somadas e taxas e índices entram como média ponderada pela população de cada município.
+        </p>
+      )}
       <div className="overflow-x-auto">
         <table className="w-full border-collapse text-base">
           <thead>
@@ -51,10 +56,7 @@ export function CompareTable({ units, unitNames, loaded, onRemove, onClear }: Pr
                   <th scope="row" className="py-1.5 pr-3 text-left font-normal text-tinta">
                     <span className="mr-2 inline-block h-2.5 w-2.5 rounded-full align-middle" style={{ background: pillar.accent }} />
                     {layer.label}
-                    <span className="block text-xs text-tinta-fraca">
-                      {metric.unit}
-                      {metric.meso_method === 'pop_weighted_mean' && units.some((u) => u.kind === 'meso') ? ', média ponderada por população nas mesorregiões' : ''}
-                    </span>
+                    <span className="block text-xs text-tinta-fraca">{metric.unit}</span>
                   </th>
                   {units.map((unit, i) => {
                     const value = unitValue(metric, unit)

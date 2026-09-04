@@ -16,7 +16,7 @@ interface LayerBase {
 export interface ChoroplethLayer extends LayerBase {
   kind: 'choropleth'
   path: string
-  format: 'int' | 'decimal' | 'percent' | 'currency'
+  format: 'int' | 'decimal' | 'percent' | 'currency' | 'index'
 }
 
 export interface CategoricalLayer extends LayerBase {
@@ -348,7 +348,7 @@ export const LAYERS: AtlasLayer[] = [
     card: {
       oQueE: 'Quantos estabelecimentos de saúde existem para cada 10 mil moradores do município, segundo o cadastro nacional do Ministério da Saúde.',
       porQueImporta: 'Mostra quanta estrutura existe para cada morador. Não mede qualidade nem capacidade: um posto de saúde e um hospital regional contam igual.',
-      comoLer: 'Cores mais escuras indicam mais estabelecimentos por habitante. Cuidado com a leitura invertida: João Pessoa fica em último lugar porque um município de 3 mil pessoas com um único posto marca uma taxa altíssima. Isto mede dispersão da rede, não fartura de atendimento.',
+      comoLer: 'Cores mais escuras indicam mais estabelecimentos por habitante. Não existe lado bom nem ruim nesta camada, e por isso a comparação não marca melhor e pior aqui: João Pessoa aparece por último porque um município de 3 mil pessoas com um único posto marca uma taxa altíssima. Isto mede dispersão da rede, não fartura de atendimento.',
     },
   },
   {
@@ -370,7 +370,7 @@ export const LAYERS: AtlasLayer[] = [
     pillar: 'gente',
     label: 'IDHM',
     path: 'gente/idhm.json',
-    format: 'decimal',
+    format: 'index',
     card: {
       oQueE: 'A versão municipal do IDH das Nações Unidas, calculada para cada município brasileiro.',
       porQueImporta: 'Junta em um só número três dimensões que costumam andar juntas, e por isso serve de retrato geral quando se quer comparar municípios de tamanhos muito diferentes.',

@@ -167,7 +167,7 @@ def run() -> None:
         layer_id="gente.saude_estabelecimentos", path="gente/saude_estabelecimentos.json",
         label="Estabelecimentos de saúde", unit="por 10 mil habitantes", year=2026,
         source="Ministério da Saúde, CNES (atenção primária, urgência e hospitalar), julho de 2026",
-        source_url=cnes_url, values=per_10k, meso_method="pop_weighted_mean", weights=pop, higher_is="better",
+        source_url=cnes_url, values=per_10k, meso_method="pop_weighted_mean", weights=pop, higher_is="neutral",
     )
     _annotate("gente/saude_estabelecimentos.json", {
         "note": (
