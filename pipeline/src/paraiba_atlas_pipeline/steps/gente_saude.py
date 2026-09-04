@@ -171,7 +171,7 @@ def run() -> None:
     )
     _annotate("gente/saude_estabelecimentos.json", {
         "note": (
-            "Conta só os estabelecimentos onde uma pessoa é atendida: postos de saúde, unidades básicas e "
+            "Conta só onde uma pessoa é atendida: postos de saúde, unidades básicas e "
             "de saúde da família, policlínicas, hospitais, unidades mistas, prontos-socorros, prontos-"
             "atendimentos e CAPS. Consultórios isolados, farmácias, laboratórios, unidades móveis e "
             "registros administrativos ficam de fora, porque inflam a conta nas cidades grandes sem "

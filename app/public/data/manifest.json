@@ -123,14 +123,15 @@
       "path": "gente/homicidios.json"
     },
     "agua.acudes": {
-      "source": "AESA, SEIRA (reservatórios monitorados)",
-      "source_url": "https://seira.aesa.pb.gov.br/api/reservatorio",
+      "source": "AESA/SEIRA (cadastro) e ANA/SAR (volumes)",
+      "source_url": "https://www.ana.gov.br/sar0/Medicao",
       "year": 2026,
-      "year_note": "SEIRA publishes no reference year; year is the fetch year",
+      "year_note": "Nenhuma das fontes declara ano de referência; o ano é o da coleta",
       "rows": 131,
       "refreshed_at": "2026-09-04",
-      "with_volume": 0,
-      "volume_note": "Volume atual e histórico exigem autenticação no SEIRA; só o cadastro é público."
+      "with_volume": 117,
+      "capacity_authority": "ANA/SAR onde há leitura, pois o SAR publica capacidade e volume na mesma linha; AESA/SEIRA preenche o resto",
+      "volume_note": "Volume e histórico vêm do SAR da ANA, que não declara licença: citar a agência e a data de consulta. O SEIRA da AESA exige autenticação para volume, então dele vem só o cadastro."
     },
     "agua.postos_chuva": {
       "source": "AESA, SEIRA (rede pluviométrica SUDENE)",
@@ -157,7 +158,28 @@
       "year": 2023,
       "rows": 223,
       "path": "gente/mortalidade_infantil.json"
+    },
+    "gente.pib_per_capita": {
+      "source": "IBGE, Produto Interno Bruto dos Municípios 2023",
+      "source_url": "https://ftp.ibge.gov.br/Pib_Municipios/2022_2023/base/base_de_dados_2010_2023_xlsx.zip",
+      "year": 2023,
+      "rows": 223,
+      "path": "gente/pib_per_capita.json"
+    },
+    "gente.idhm": {
+      "source": "Atlas do Desenvolvimento Humano no Brasil (PNUD, Ipea e FJP), Censo 2010, via Ipeadata",
+      "source_url": "http://www.ipeadata.gov.br/api/odata4/ValoresSerie(SERCODIGO='ADH_IDHM')",
+      "year": 2010,
+      "rows": 223,
+      "path": "gente/idhm.json"
+    },
+    "gente.banda_larga": {
+      "source": "Anatel, densidade de banda larga fixa, mediana de 6 meses até 7/2026",
+      "source_url": "https://www.anatel.gov.br/dadosabertos/paineis_de_dados/acessos/acessos_banda_larga_fixa.zip",
+      "year": 2026,
+      "rows": 223,
+      "path": "gente/banda_larga.json"
     }
   },
-  "generated_at": "2026-09-04T20:06:39+00:00"
+  "generated_at": "2026-09-04T20:19:42+00:00"
 }

@@ -33,6 +33,8 @@ export interface Metric {
   percentile: Record<MunicipioCode, number>
   meso: Record<string, number>
   meso_method: 'sum' | 'pop_weighted_mean'
+  /** Caveat the pipeline attaches when the number is easy to misread. Rendered verbatim. */
+  note?: string
 }
 
 export interface MunicipioIndexEntry {

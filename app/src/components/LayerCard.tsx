@@ -50,6 +50,7 @@ export function LayerCard({ layer, metric, entries, colors, labels, provenance, 
           </p>
         )}
       </Section>
+      {metric?.note && <Section title="Ressalva">{metric.note}</Section>}
       {provenance && (
         <Section title="Fonte">
           <a href={provenance.source_url} target="_blank" rel="noreferrer" className="cursor-pointer underline decoration-tinta-fraca underline-offset-2 hover:decoration-tinta">

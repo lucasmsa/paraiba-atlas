@@ -8,6 +8,7 @@ from .steps import (
     agua_saneamento,
     boundaries,
     gente_crime,
+    gente_economia,
     gente_saude,
     idade,
     moradores,
@@ -40,6 +41,7 @@ STEPS = {
     "idade": idade.run,
     "crime": gente_crime.run,
     "saude": gente_saude.run,
+    "economia": gente_economia.run,
 }
 
 
