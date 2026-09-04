@@ -8,6 +8,24 @@ export const POINT_LAYER = 'atlas-points-circle'
 export const POINT_LABELS = 'atlas-points-label'
 
 const MIN_RADIUS = 3
+const NO_READING_COLOR = '#b9b1a4'
+
+/** Dry to full, read against the paper ground. Matches the Água ramp so the pillar stays one system. */
+const FILL_STOPS: [number, string][] = [
+  [0, '#c2703a'],
+  [25, '#d9a441'],
+  [50, '#8fbfae'],
+  [75, '#3a8f93'],
+  [100, '#1e5f66'],
+]
+
+function colorExpression(layer: PointLayer): ExpressionSpecification | string {
+  if (!layer.fillPercentField) return layer.color
+  const percent: ExpressionSpecification = ['to-number', ['get', layer.fillPercentField], -1]
+  const ramp: ExpressionSpecification = ['interpolate', ['linear'], percent]
+  FILL_STOPS.forEach(([stop, color]) => ramp.push(stop, color))
+  return ['case', ['<', percent, 0], NO_READING_COLOR, ramp]
+}
 
 function radiusExpression(layer: PointLayer): ExpressionSpecification | number {
   if (!layer.sizeField) return 5
@@ -32,10 +50,10 @@ export function usePointLayer(mapRef: React.RefObject<MapLibreMap | null>, ready
       source: POINT_SOURCE,
       paint: {
         'circle-radius': radiusExpression(layer),
-        'circle-color': layer.color,
-        'circle-opacity': 0.72,
-        'circle-stroke-color': '#f3e8d2',
-        'circle-stroke-width': 1,
+        'circle-color': colorExpression(layer),
+        'circle-opacity': 0.88,
+        'circle-stroke-color': '#17120e',
+        'circle-stroke-width': 0.8,
       },
     })
     map.addLayer({

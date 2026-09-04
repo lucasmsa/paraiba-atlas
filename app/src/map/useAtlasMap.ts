@@ -5,6 +5,29 @@ import { dataUrl } from '../data/contract'
 import { BASE_STYLE, HATCH_IMAGE, LAYERS, OPENING_CAMERA, PARAIBA_BOUNDS, SOURCES, TERRAIN_TILES } from './constants'
 import { hatchImage } from './hatch'
 
+const TERRAIN_GRACE_MS = 6000
+
+/**
+ * The elevation tiles are third-party and stall often enough to matter. A pending DEM
+ * blocks the whole render and aborted tiles emit no error event, so relief is enabled
+ * only once its data actually arrives, and abandoned if it does not.
+ */
+function enableTerrainWhenReady(map: MapLibreMap) {
+  const give_up = window.setTimeout(() => {
+    map.off('sourcedata', onData)
+    if (map.getLayer(LAYERS.hillshade)) map.setLayoutProperty(LAYERS.hillshade, 'visibility', 'none')
+  }, TERRAIN_GRACE_MS)
+
+  function onData(event: { sourceId?: string; isSourceLoaded?: boolean }) {
+    if (event.sourceId !== SOURCES.terrain || !event.isSourceLoaded) return
+    map.off('sourcedata', onData)
+    window.clearTimeout(give_up)
+    map.setTerrain({ source: SOURCES.terrain, exaggeration: 1.6 })
+  }
+
+  map.on('sourcedata', onData)
+}
+
 function addAtlasSourcesAndLayers(map: MapLibreMap) {
   const dem = { type: 'raster-dem' as const, tiles: [TERRAIN_TILES], encoding: 'terrarium' as const, tileSize: 256, maxzoom: 14 }
   map.addSource(SOURCES.terrain, dem)
@@ -29,7 +52,6 @@ function addAtlasSourcesAndLayers(map: MapLibreMap) {
     layout: { 'text-field': ['get', 'nome'], 'text-size': 15, 'text-letter-spacing': 0.08, 'text-transform': 'uppercase', 'text-font': ['Noto Sans Bold'] },
     paint: { 'text-color': '#1c1a17', 'text-halo-color': 'rgba(250,246,238,0.9)', 'text-halo-width': 1.6 },
   })
-  map.setTerrain({ source: SOURCES.terrain, exaggeration: 1.6 })
 }
 
 export function useAtlasMap() {
@@ -50,6 +72,7 @@ export function useAtlasMap() {
     map.addControl(new NavigationControl({ visualizePitch: true }), 'bottom-right')
     map.on('load', () => {
       addAtlasSourcesAndLayers(map)
+      enableTerrainWhenReady(map)
       map.easeTo({ ...OPENING_CAMERA, duration: 1800 })
       setReady(true)
     })

@@ -42,6 +42,10 @@ export interface PointLayer extends LayerBase {
   /** Domain of sizeField in source units. Radius scales with its square root so area, not radius, tracks the value. */
   sizeDomain?: [number, number]
   maxRadius?: number
+  /** Field holding a monthly series; rendered as a sparkline in the detail panel. */
+  serieField?: string
+  /** Field in 0-100 that colors the point, overriding the flat layer color. */
+  fillPercentField?: string
 }
 
 export type FillLayer = ChoroplethLayer | CategoricalLayer
@@ -270,17 +274,21 @@ export const LAYERS: AtlasLayer[] = [
     sizeDomain: [0, 744000000],
     maxRadius: 13,
     color: '#1e5f66',
+    fillPercentField: 'percentual',
+    serieField: 'serie_mensal',
     unit: 'capacidade',
     detailFields: [
       { field: 'municipio', label: 'Município' },
       { field: 'bacia', label: 'Bacia' },
-      { field: 'capacidade_m3', label: 'Capacidade (m³)' },
-      { field: 'percentual', label: 'Volume atual' },
+      { field: 'capacidade_hm3', label: 'Capacidade (hm³)' },
+      { field: 'volume_hm3', label: 'Volume (hm³)' },
+      { field: 'percentual', label: 'Cheio (%)' },
+      { field: 'data_volume', label: 'Medição' },
     ],
     card: {
-      oQueE: 'Os 131 açudes que a AESA, a agência estadual de águas da Paraíba, mantém sob monitoramento. Cada ponto traz a capacidade máxima do reservatório, o município e a bacia a que pertence.',
-      porQueImporta: 'No semiárido o açude é a infraestrutura que decide se uma cidade tem água na torneira. A rocha cristalina que cobre quase todo o estado não guarda água subterrânea em quantidade, então o abastecimento do interior depende de reservatório e adutora. Coremas, Mãe d\'Água e Epitácio Pessoa concentram a maior parte da água armazenada da Paraíba.',
-      comoLer: 'Círculos maiores indicam açudes de maior capacidade. O quanto cada açude tem de água hoje não aparece aqui: a AESA publica o volume atual apenas para usuários autenticados, e a tabela pública antiga parou de ser atualizada em 2017. O mapa mostra a capacidade instalada, não o estoque.',
+      oQueE: 'Os 131 açudes monitorados da Paraíba. O cadastro vem da AESA, a agência estadual de águas, e o volume de cada um vem do SAR, o sistema de acompanhamento de reservatórios da Agência Nacional de Águas.',
+      porQueImporta: 'No semiárido o açude decide se a cidade tem água na torneira. A rocha cristalina que cobre quase todo o estado quase não guarda água subterrânea, então o abastecimento do interior depende de reservatório e adutora, não de poço. Esta é a camada que responde à pergunta central do pilar: tem água ou não tem.',
+      comoLer: 'O tamanho do círculo é a capacidade do açude e a cor é quanto dele está cheio hoje: laranja é vazio, azul é cheio. Cinza significa sem leitura recente. Clique em um açude para ver a série dos últimos meses. Alguns passam de 100% porque estão vertendo acima da capacidade nominal.',
     },
   },
   {

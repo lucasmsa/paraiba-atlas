@@ -179,7 +179,21 @@
       "year": 2026,
       "rows": 223,
       "path": "gente/banda_larga.json"
+    },
+    "gente.ideb_anos_iniciais": {
+      "source": "INEP, IDEB 2023, rede pública, 1º ao 5º ano do ensino fundamental",
+      "source_url": "https://download.inep.gov.br/ideb/resultados/divulgacao_anos_iniciais_municipios_2023.zip",
+      "year": 2023,
+      "rows": 217,
+      "path": "gente/ideb_anos_iniciais.json"
+    },
+    "gente.ideb_anos_finais": {
+      "source": "INEP, IDEB 2023, rede pública, 6º ao 9º ano do ensino fundamental",
+      "source_url": "https://download.inep.gov.br/ideb/resultados/divulgacao_anos_finais_municipios_2023.zip",
+      "year": 2023,
+      "rows": 217,
+      "path": "gente/ideb_anos_finais.json"
     }
   },
-  "generated_at": "2026-09-04T20:19:42+00:00"
+  "generated_at": "2026-09-04T20:31:15+00:00"
 }

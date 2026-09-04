@@ -1,0 +1,13 @@
+import { chromium } from '@playwright/test'
+const browser = await chromium.launch()
+const page = await browser.newPage({ viewport: { width: 1440, height: 900 } })
+await page.goto(process.argv[2])
+await page.waitForTimeout(6000)
+const before = await page.evaluate(() => ({ loaded: window.__atlasMap?.loaded(), terrain: !!window.__atlasMap?.getTerrain() }))
+await page.evaluate(() => window.__atlasMap?.setTerrain(null))
+await page.waitForTimeout(3500)
+const after = await page.evaluate(() => ({ loaded: window.__atlasMap?.loaded() }))
+console.log('before setTerrain(null):', JSON.stringify(before))
+console.log('after  setTerrain(null):', JSON.stringify(after))
+await page.screenshot({ path: '/private/tmp/claude-501/-Users-lucasmoreira-Main-personal/e707289f-48e4-4f31-92e8-bc701cb24ffd/scratchpad/51-noterrain.png' })
+await browser.close()
