@@ -96,7 +96,7 @@ export function App() {
           </div>
         )}
         {points && pointSelection.selected && (
-          <div className="w-72 shrink-0">
+          <div className="w-80 shrink-0">
             <PointDetail layer={points} properties={pointSelection.selected} onClose={pointSelection.clear} />
           </div>
         )}

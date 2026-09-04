@@ -38,6 +38,7 @@ export interface PointLayer extends LayerBase {
   color: string
   unit: string
   detailFields?: { field: string; label: string }[]
+  footnoteField?: string
 }
 
 export type FillLayer = ChoroplethLayer | CategoricalLayer
@@ -145,10 +146,17 @@ export const LAYERS: AtlasLayer[] = [
     sizeField: null,
     color: '#7d4212',
     unit: 'vias',
+    detailFields: [
+      { field: 'municipio', label: 'Município' },
+      { field: 'vias', label: 'Vias' },
+      { field: 'estilos', label: 'Estilos' },
+      { field: 'graduacao', label: 'Graduação' },
+    ],
+    footnoteField: 'fonte_coordenada',
     card: {
-      oQueE: 'Os setores de escalada em rocha da Paraíba. A lista vem dos autores do Guia de Escalada na Paraíba (Stenio Timotheo e Wolgrand Falcão, 2023), que catalogaram mais de 400 vias em 36 montanhas. Este índice é editorial: os pontos foram localizados pelo OpenStreetMap e ainda não trazem número de vias nem graduações.',
-      porQueImporta: 'A escalada paraibana acontece nos mesmos granitos e gnaisses que formam os lajedos e serras do pilar Terra. Sobrepor os setores ao mapa geológico mostra por que a rocha boa está onde está.',
-      comoLer: 'Um ponto por setor. Aproxime o mapa para ver os nomes. Três setores do guia ainda não têm localização e não aparecem.',
+      oQueE: 'Os setores de escalada em rocha da Paraíba. A lista parte dos nomes que os autores do Guia de Escalada na Paraíba (Stenio Timotheo e Wolgrand Falcão, 2023) publicam, e as coordenadas vêm de bases de escalada e do OpenStreetMap. É um índice editorial: mostra onde se escala, não quais são as vias.',
+      porQueImporta: 'A escalada paraibana acontece nos mesmos granitos e gnaisses que formam os lajedos e as serras do pilar Terra. Sobrepor os setores ao mapa geológico mostra por que a rocha boa está onde está: quase tudo cai sobre embasamento cristalino do Pré-Cambriano.',
+      comoLer: 'Um ponto por setor, e cada coordenada foi conferida contra o polígono do seu município. Dos 11 setores conhecidos, 8 têm posição verificada. Pedra do Cordeiro, Almas Gêmeas e Pedra das Chaminés não têm coordenada publicada em nenhuma base e ficam de fora do mapa até saírem do guia impresso. Número de vias e graduações ainda não foram preenchidos.',
     },
   },
   {

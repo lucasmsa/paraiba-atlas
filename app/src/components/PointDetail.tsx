@@ -11,6 +11,7 @@ const isPresent = (value: string | number | null | undefined) => value !== null 
 
 export function PointDetail({ layer, properties, onClose }: Props) {
   const rows = (layer.detailFields ?? []).filter((row) => isPresent(properties[row.field]))
+  const footnote = layer.footnoteField ? properties[layer.footnoteField] : null
   return (
     <aside className="cordel-bloco cordel-sombra flex flex-col gap-2 p-4">
       <header className="flex items-start justify-between gap-3">
@@ -29,6 +30,7 @@ export function PointDetail({ layer, properties, onClose }: Props) {
           ))}
         </dl>
       )}
+      {isPresent(footnote) && <p className="text-sm leading-snug text-tinta-fraca">{String(footnote)}</p>}
       {isPresent(properties.url) && (
         <a href={String(properties.url)} target="_blank" rel="noreferrer" className="cursor-pointer text-base underline decoration-tinta-fraca underline-offset-2 hover:decoration-tinta">
           Ficha completa

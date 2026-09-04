@@ -78,11 +78,12 @@
       "path": "geo/terra/geologia.geojson"
     },
     "terra.escalada": {
-      "source": "Índice editorial a partir do Guia de Escalada na Paraíba (Timotheo e Falcão, 2023); coordenadas OpenStreetMap Nominatim",
+      "source": "Índice editorial a partir do Guia de Escalada na Paraíba (Timotheo e Falcão, 2023); coordenadas de escaladas.com.br, OpenStreetMap e literatura, citadas por setor",
       "source_url": "https://escaladanaparaiba.com.br/",
       "year": 2023,
-      "rows": 5,
-      "editorial": true
+      "rows": 11,
+      "editorial": true,
+      "year_note": "8 de 11 setores com coordenada verificada; os demais aguardam o guia impresso"
     },
     "gente.idade_mediana": {
       "source": "IBGE, Censo Demográfico 2022 (SIDRA 9756)",
@@ -115,5 +116,5 @@
       "path": "geo/terra/picos.geojson"
     }
   },
-  "generated_at": "2026-09-04T19:32:19+00:00"
+  "generated_at": "2026-09-04T19:43:09+00:00"
 }

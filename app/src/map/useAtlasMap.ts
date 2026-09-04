@@ -54,6 +54,7 @@ export function useAtlasMap() {
       setReady(true)
     })
     mapRef.current = map
+    if (import.meta.env.DEV) Object.assign(window, { __atlasMap: map })
     return () => {
       map.remove()
       mapRef.current = null

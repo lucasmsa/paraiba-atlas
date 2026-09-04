@@ -1,14 +1,93 @@
 {
-  "note": "Crag index, editorial. Names are the crags the authors of the Guia de Escalada na Paraíba (Timotheo e Falcão, 2023) list publicly on escaladanaparaiba.com.br. Route counts, styles and grades are filled from the printed guide. Coordinates are geocoded from OpenStreetMap and must be checked on site.",
+  "note": "Índice editorial de setores de escalada. Os nomes são os que os autores do Guia de Escalada na Paraíba (Timotheo e Falcão, 2023) divulgam publicamente em escaladanaparaiba.com.br. Contagem de vias, estilos e graduações vêm do guia impresso e ainda não foram preenchidos. Coordenadas vêm de fontes citadas por setor, nunca inventadas: setores sem coordenada verificável ficam com geocodificado false e sem geometria.",
   "crags": [
-    {"nome": "Pedra da Boca", "municipio": "Araruna", "query": "Pedra da Boca, Araruna, Paraíba"},
-    {"nome": "Banguelo", "municipio": "Cajá", "query": "Cajá, Paraíba"},
-    {"nome": "Algodão de Jandaíra", "municipio": "Algodão de Jandaíra", "query": "Algodão de Jandaíra, Paraíba"},
-    {"nome": "Parque do Poeta", "municipio": "Campina Grande", "query": "Parque do Poeta Ronaldo Cunha Lima, Campina Grande, Paraíba"},
-    {"nome": "Pedra do Marinho", "municipio": "Massaranduba", "query": "Massaranduba, Paraíba"},
-    {"nome": "Pedra do Cordeiro", "municipio": null, "query": null},
-    {"nome": "Almas Gêmeas", "municipio": null, "query": null},
-    {"nome": "Pedra das Chaminés", "municipio": null, "query": null},
-    {"nome": "Pedra do Tendó", "municipio": "Teixeira", "query": "Pedra do Tendó, Teixeira, Paraíba"}
+    {
+      "nome": "Pedra da Boca",
+      "municipio": "Araruna",
+      "lon": -35.67523031880148,
+      "lat": -6.455975108519959,
+      "fonte_coordenada": "escaladas.com.br/local/id/457, coordenada do setor; confere com o nó OSM natural=peak 4831761553 (-6.456343, -35.675579), diferença de ~40 m",
+      "precisao": "setor"
+    },
+    {
+      "nome": "Pedra do Banguelo",
+      "municipio": "Mogeiro",
+      "lon": -35.519787893227594,
+      "lat": -7.232869981259289,
+      "fonte_coordenada": "escaladas.com.br/local/id/1606, coordenada do setor; geocodificação reversa no Nominatim devolve Gameleira, Mogeiro",
+      "precisao": "setor"
+    },
+    {
+      "nome": "Pedra do Marinho",
+      "municipio": "Massaranduba",
+      "lon": -35.816367187595894,
+      "lat": -7.199911498322591,
+      "fonte_coordenada": "escaladas.com.br/local/id/822, coordenada do setor",
+      "precisao": "setor"
+    },
+    {
+      "nome": "Pedra da Cabeça",
+      "municipio": "Algodão de Jandaíra",
+      "lon": -36.0052083741561,
+      "lat": -6.926648185181363,
+      "fonte_coordenada": "escaladas.com.br/local/id/346, coordenada do setor",
+      "precisao": "setor"
+    },
+    {
+      "nome": "Pedra Furada",
+      "municipio": "Algodão de Jandaíra",
+      "lon": -36.00915459178716,
+      "lat": -6.929177406074206,
+      "fonte_coordenada": "escaladas.com.br/local/id/413, coordenada do setor",
+      "precisao": "setor"
+    },
+    {
+      "nome": "Pedra do Caboclo",
+      "municipio": "Algodão de Jandaíra",
+      "lon": -35.97699419126505,
+      "lat": -6.91873428451934,
+      "fonte_coordenada": "escaladas.com.br/local/id/1098, coordenada do setor",
+      "precisao": "setor"
+    },
+    {
+      "nome": "Pedra do Tendó",
+      "municipio": "Teixeira",
+      "lon": -37.2589822,
+      "lat": -7.2026263,
+      "fonte_coordenada": "OpenStreetMap way 527161637, natural=cliff + sport=climbing, centroide do paredão",
+      "precisao": "paredão"
+    },
+    {
+      "nome": "Parque do Poeta",
+      "municipio": "Campina Grande",
+      "lon": -35.84824,
+      "lat": -7.224968,
+      "fonte_coordenada": "Centro do retângulo publicado para o Parque Estadual do Poeta e Repentista Juvenal de Oliveira (7°13'43,07\"S/35°51'47,23\"W a 7°13'16,70\"S/35°50'0,1\"W), citado no estudo de impacto socioambiental da unidade de conservação",
+      "precisao": "centro do parque"
+    },
+    {
+      "nome": "Pedra do Cordeiro",
+      "municipio": "Belém",
+      "lon": null,
+      "lat": null,
+      "fonte_coordenada": "Município identificado pela Wikipédia (oeste de Belém, divisa com Bananeiras, riacho Picada como divisor, altitude ~240 m). Nenhuma coordenada publicada encontrada no OpenStreetMap, Nominatim, Wikidata ou escaladas.com.br",
+      "precisao": null
+    },
+    {
+      "nome": "Almas Gêmeas",
+      "municipio": null,
+      "lon": null,
+      "lat": null,
+      "fonte_coordenada": "Setor citado por escaladanaparaiba.com.br sem município. Ausente do OpenStreetMap, Nominatim, Wikidata e escaladas.com.br. O guia impresso resolve",
+      "precisao": null
+    },
+    {
+      "nome": "Pedra das Chaminés",
+      "municipio": null,
+      "lon": null,
+      "lat": null,
+      "fonte_coordenada": "Setor citado por escaladanaparaiba.com.br sem município. Ausente do OpenStreetMap, Nominatim, Wikidata e escaladas.com.br. O guia impresso resolve",
+      "precisao": null
+    }
   ]
 }
