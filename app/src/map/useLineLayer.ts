@@ -1,9 +1,12 @@
 import { useEffect } from 'react'
 import type { DataDrivenPropertyValueSpecification, Map as MapLibreMap } from 'maplibre-gl'
+
+const CASING_PAD = 2.4
 import type { LineLayer } from '../config/layers'
 import { dataUrl } from '../data/contract'
 
 export const LINE_SOURCE = 'atlas-lines'
+export const LINE_CASING = 'atlas-lines-casing'
 export const LINE_LAYER = 'atlas-lines-stroke'
 export const LINE_POINTS = 'atlas-lines-points'
 export const LINE_LABELS = 'atlas-lines-label'
@@ -22,8 +25,15 @@ function widthExpression(layer: LineLayer): DataDrivenPropertyValueSpecification
   return ['match', ['to-string', ['get', layer.classField]], ...pairs, layer.fallback.width] as DataDrivenPropertyValueSpecification<number>
 }
 
+function casingWidth(layer: LineLayer): DataDrivenPropertyValueSpecification<number> {
+  const entries = Object.entries(layer.styles)
+  if (!layer.classField || entries.length === 0) return layer.fallback.width + CASING_PAD
+  const pairs = entries.flatMap(([value, style]) => [value, style.width + CASING_PAD])
+  return ['match', ['to-string', ['get', layer.classField]], ...pairs, layer.fallback.width + CASING_PAD] as DataDrivenPropertyValueSpecification<number>
+}
+
 function removeIfPresent(map: MapLibreMap) {
-  for (const id of [LINE_LABELS, LINE_POINTS, LINE_LAYER]) if (map.getLayer(id)) map.removeLayer(id)
+  for (const id of [LINE_LABELS, LINE_POINTS, LINE_LAYER, LINE_CASING]) if (map.getLayer(id)) map.removeLayer(id)
   if (map.getSource(LINE_SOURCE)) map.removeSource(LINE_SOURCE)
 }
 
@@ -35,6 +45,15 @@ export function useLineLayer(mapRef: React.RefObject<MapLibreMap | null>, ready:
     if (!layer) return
 
     map.addSource(LINE_SOURCE, { type: 'geojson', data: dataUrl(layer.geoPath) })
+    // A pale casing keeps a road legible over any fill beneath it, dark or light.
+    map.addLayer({
+      id: LINE_CASING,
+      type: 'line',
+      source: LINE_SOURCE,
+      filter: ['!=', ['geometry-type'], 'Point'],
+      layout: { 'line-cap': 'round', 'line-join': 'round' },
+      paint: { 'line-color': '#f3e8d2', 'line-width': casingWidth(layer), 'line-opacity': 0.85 },
+    })
     map.addLayer({
       id: LINE_LAYER,
       type: 'line',
