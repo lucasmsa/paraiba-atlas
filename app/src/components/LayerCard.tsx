@@ -38,7 +38,7 @@ export function LayerCard({ layer, metric, entries, colors, labels, provenance, 
         {subtitle && <p className="mt-0.5 text-base text-tinta-fraca">{subtitle}</p>}
       </header>
       <Section title="O que é">{layer.card.oQueE}</Section>
-      <Section title="Por que importa">{layer.card.porQueImporta}</Section>
+      <Section title="O que mostra">{layer.card.oQueMostra}</Section>
       <Section title="Como ler">
         <p className="mb-2">{layer.card.comoLer}</p>
         {layer.kind === 'choropleth' && metric && <Legend metric={metric} ramp={ramp} format={layer.format} />}

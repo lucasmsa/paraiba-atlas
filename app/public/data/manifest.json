@@ -269,7 +269,42 @@
       "path": "terra/rodoviarias.geojson",
       "license": "ODbL 1.0 (OpenStreetMap contributors)",
       "municipios_com_terminal": 38
+    },
+    "geo.bairros": {
+      "source": "IBGE, malha de bairros do Censo 2022",
+      "source_url": "https://geoftp.ibge.gov.br/organizacao_do_territorio/malhas_territoriais/malhas_de_setores_censitarios__divisoes_intramunicipais/censo_2022/bairros/shp/UF/PB_bairros_CD2022.zip",
+      "year": 2022,
+      "rows": 124,
+      "path": "geo/bairros.geojson"
+    },
+    "bairros.populacao": {
+      "source": "IBGE, Censo 2022, agregados por bairro (V0001)",
+      "source_url": "https://ftp.ibge.gov.br/Censos/Censo_Demografico_2022/Agregados_por_Setores_Censitarios/Agregados_por_Bairro_csv/Agregados_por_bairros_basico_BR_20260520.zip",
+      "year": 2022,
+      "rows": 124,
+      "path": "gente/bairros/populacao.json"
+    },
+    "bairros.densidade": {
+      "source": "IBGE, Censo 2022, agregados por bairro (V0001) sobre a área do polígono",
+      "source_url": "https://ftp.ibge.gov.br/Censos/Censo_Demografico_2022/Agregados_por_Setores_Censitarios/Agregados_por_Bairro_csv/Agregados_por_bairros_basico_BR_20260520.zip",
+      "year": 2022,
+      "rows": 124,
+      "path": "gente/bairros/densidade.json"
+    },
+    "bairros.moradores_por_domicilio": {
+      "source": "IBGE, Censo 2022, agregados por bairro (V0005)",
+      "source_url": "https://ftp.ibge.gov.br/Censos/Censo_Demografico_2022/Agregados_por_Setores_Censitarios/Agregados_por_Bairro_csv/Agregados_por_bairros_basico_BR_20260520.zip",
+      "year": 2022,
+      "rows": 124,
+      "path": "gente/bairros/moradores_por_domicilio.json"
+    },
+    "bairros.domicilios_sem_morador": {
+      "source": "IBGE, Censo 2022, agregados por bairro (V0008 e V0009 sobre V0003)",
+      "source_url": "https://ftp.ibge.gov.br/Censos/Censo_Demografico_2022/Agregados_por_Setores_Censitarios/Agregados_por_Bairro_csv/Agregados_por_bairros_basico_BR_20260520.zip",
+      "year": 2022,
+      "rows": 124,
+      "path": "gente/bairros/domicilios_sem_morador.json"
     }
   },
-  "generated_at": "2026-09-04T21:23:32+00:00"
+  "generated_at": "2026-09-04T22:02:48+00:00"
 }

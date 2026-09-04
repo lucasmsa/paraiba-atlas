@@ -1,0 +1,11 @@
+import { chromium } from '@playwright/test'
+const browser = await chromium.launch()
+const page = await browser.newPage({ viewport: { width: 900, height: 200 } })
+await page.goto(process.argv[2])
+await page.waitForTimeout(4000)
+const icon = await page.evaluate(() => document.querySelector('link[rel="icon"]')?.href)
+const title = await page.title()
+console.log(JSON.stringify({ icon, title }))
+const res = await page.request.get(icon)
+console.log('icon status:', res.status(), res.headers()['content-type'])
+await browser.close()
