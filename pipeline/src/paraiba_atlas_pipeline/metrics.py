@@ -7,8 +7,11 @@ from .paths import OUT_DIR
 
 
 def _quantile_breaks(values: list[float], bins: int = 5) -> list[float]:
+    """Distinct edges only: when many municípios share a value, repeated edges would
+    render as empty ranges like "up to 0" sitting above "0 to 10"."""
     ordered = sorted(values)
-    return [ordered[min(len(ordered) - 1, round(i * len(ordered) / bins))] for i in range(1, bins)]
+    edges = [ordered[min(len(ordered) - 1, round(i * len(ordered) / bins))] for i in range(1, bins)]
+    return sorted(set(edges))
 
 
 def _meso_aggregate(values: dict[str, float], index: dict[str, dict], method: str, weights: dict[str, float] | None) -> dict[str, float]:
@@ -32,6 +35,8 @@ def emit_metric(*, layer_id: str, path: str, label: str, unit: str, year: int, s
     payload = {
         "id": layer_id, "label": label, "unit": unit, "year": year, "source": source, "source_url": source_url,
         "n": n, "higher_is": higher_is,
+        "min": min(values.values()),
+        "max": max(values.values()),
         "state_median": statistics.median(values.values()),
         "state_total": sum(values.values()) if meso_method == "sum" else None,
         "breaks": _quantile_breaks(list(values.values())),

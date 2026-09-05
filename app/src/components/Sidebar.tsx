@@ -28,19 +28,23 @@ interface Props {
   onSelectPillar: (id: PillarId) => void
   onToggleLayer: (id: string) => void
   onOpenSobre: () => void
+  /** In the bottom sheet the header lives in the handle, so it is not repeated here. */
+  compact?: boolean
 }
 
-export function Sidebar({ pillar, layers, activeIds, cards, mesos, compare, onSelectPillar, onToggleLayer, onOpenSobre }: Props) {
+export function Sidebar({ pillar, layers, activeIds, cards, mesos, compare, onSelectPillar, onToggleLayer, onOpenSobre, compact = false }: Props) {
   const cardsRef = useScrollToCard(cards.map((card) => card.layer.id).join(',') || null)
 
   return (
-    <div className="cordel-papel flex h-full flex-col gap-5 overflow-y-auto p-5">
-      <header className="flex flex-col gap-2">
-        <h1 className="cordel-titulo text-[34px] text-tinta">Atlas da Paraíba</h1>
-        <p className="text-base leading-snug text-tinta">
-          Da Mata ao Sertão, o estado muda de chuva, de rocha e de vida. Este atlas lê a Paraíba em três pilares.
-        </p>
-      </header>
+    <div className={`cordel-papel flex h-full flex-col overflow-y-auto ${compact ? 'gap-4 p-4' : 'gap-5 p-5'}`}>
+      {!compact && (
+        <header className="flex flex-col gap-2">
+          <h1 className="cordel-titulo text-[34px] text-tinta">Atlas da Paraíba</h1>
+          <p className="text-base leading-snug text-tinta">
+            Da Mata ao Sertão, o estado muda de chuva, de rocha e de vida. Este atlas lê a Paraíba em três pilares.
+          </p>
+        </header>
+      )}
       <PillarTabs active={pillar?.id ?? null} onSelect={onSelectPillar} />
       {pillar && <LayerList layers={layers} activeIds={activeIds} onToggle={onToggleLayer} />}
       {pillar && cards.length > 0 && (

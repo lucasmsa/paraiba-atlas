@@ -17,14 +17,14 @@ export function Sobre({ onClose }: Props) {
   const rows = useSourceRows()
 
   return (
-    <div className="fixed inset-0 z-30 flex items-start justify-center overflow-y-auto bg-tinta/60 p-6" onClick={onClose}>
+    <div className="fixed inset-0 z-30 flex items-start justify-center overflow-y-auto bg-tinta/60 p-3 md:p-6" onClick={onClose}>
       <article
-        className="cordel-papel cordel-bloco cordel-sombra my-6 flex w-full max-w-3xl flex-col gap-6 p-7"
+        className="cordel-papel cordel-bloco cordel-sombra my-3 flex w-full max-w-3xl flex-col gap-5 p-4 md:my-6 md:gap-6 md:p-7"
         onClick={(event) => event.stopPropagation()}
       >
         <header className="flex items-start justify-between gap-4">
           <div>
-            <h2 className="cordel-titulo text-[30px] text-tinta">Sobre o atlas</h2>
+            <h2 className="cordel-titulo text-[22px] text-tinta md:text-[30px]">Sobre o atlas</h2>
             <p className="mt-1 text-base text-tinta-fraca">O que é, de onde vêm os dados e o que falta.</p>
           </div>
           <button type="button" onClick={onClose} aria-label="Fechar" className="cursor-pointer px-2 text-2xl leading-none text-tinta-fraca hover:text-tinta">

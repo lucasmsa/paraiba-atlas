@@ -25,6 +25,8 @@ export interface Metric {
   source_url: string
   n: number
   higher_is: 'better' | 'worse' | 'neutral'
+  min: number
+  max: number
   state_median: number
   state_total: number | null
   breaks: number[]

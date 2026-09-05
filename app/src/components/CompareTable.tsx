@@ -20,7 +20,7 @@ const TONE_STYLE: Record<CellTone, string> = {
 
 export function CompareTable({ units, unitNames, loaded, onRemove, onClear }: Props) {
   return (
-    <section className="cordel-bloco cordel-sombra flex max-h-[calc(100vh-6rem)] flex-col gap-3 p-4" aria-label="Comparação">
+    <section className="cordel-bloco cordel-sombra flex max-h-[min(60vh,calc(100vh-6rem))] w-full flex-col gap-3 p-4 md:max-h-[calc(100vh-6rem)] md:w-auto" aria-label="Comparação">
       <header className="flex shrink-0 items-baseline justify-between gap-4">
         <h2 className="cordel-titulo text-[20px] text-tinta">Comparar</h2>
         <button

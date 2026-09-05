@@ -7,10 +7,23 @@ import 'maplibre-gl/dist/maplibre-gl.css'
 // which keeps them siblings so the worker's own relative import resolves.
 setWorkerUrl(`${import.meta.env.BASE_URL}maplibre/maplibre-gl-worker.mjs`)
 import { dataUrl } from '../data/contract'
-import { BASE_STYLE, HATCH_IMAGE, LAYERS, OPENING_CAMERA, PARAIBA_BOUNDS, SOURCES, TERRAIN_TILES } from './constants'
+import { BASE_STYLE, COMPACT_CAMERA, HATCH_IMAGE, LAYERS, OPENING_CAMERA, PARAIBA_BOUNDS, SOURCES, TERRAIN_TILES } from './constants'
 import { hatchImage } from './hatch'
 
 const TERRAIN_GRACE_MS = 6000
+const COMPACT_WIDTH = 768
+
+/** Padding must leave room for whatever chrome overlays the map, or the fit zooms to nothing. */
+const isCompactViewport = () => window.innerWidth < COMPACT_WIDTH
+
+function openingCamera() {
+  return isCompactViewport() ? COMPACT_CAMERA : OPENING_CAMERA
+}
+
+function fitPadding() {
+  if (window.innerWidth < COMPACT_WIDTH) return { top: 62, bottom: 96, left: 8, right: 8 }
+  return { top: 40, bottom: 40, left: 40, right: 400 }
+}
 
 /**
  * The elevation tiles are third-party and stall often enough to matter. A pending DEM
@@ -70,15 +83,15 @@ export function useAtlasMap() {
       container: containerRef.current,
       style: BASE_STYLE,
       bounds: PARAIBA_BOUNDS,
-      fitBoundsOptions: { padding: { top: 40, bottom: 40, left: 40, right: 380 } },
+      fitBoundsOptions: { padding: fitPadding() },
       maxPitch: 70,
       attributionControl: { compact: true },
     })
-    map.addControl(new NavigationControl({ visualizePitch: true }), 'bottom-right')
+    map.addControl(new NavigationControl({ visualizePitch: true }), 'top-right')
     map.on('load', () => {
       addAtlasSourcesAndLayers(map)
       enableTerrainWhenReady(map)
-      map.easeTo({ ...OPENING_CAMERA, duration: 1800 })
+      map.easeTo({ ...openingCamera(), duration: 1800 })
       setReady(true)
     })
     mapRef.current = map
@@ -91,4 +104,18 @@ export function useAtlasMap() {
   }, [])
 
   return { containerRef, mapRef, ready }
+}
+
+/** Crossing the breakpoint invalidates both the fit and the opening tilt. */
+export function useMapBreakpoint(mapRef: React.RefObject<MapLibreMap | null>, ready: boolean, compact: boolean) {
+  const previous = useRef(compact)
+
+  useEffect(() => {
+    const map = mapRef.current
+    if (!map || !ready || previous.current === compact) return
+    previous.current = compact
+    map.resize()
+    map.easeTo({ ...openingCamera(), duration: 0 })
+    map.fitBounds(PARAIBA_BOUNDS, { padding: fitPadding(), duration: 400 })
+  }, [mapRef, ready, compact])
 }

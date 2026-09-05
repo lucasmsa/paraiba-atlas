@@ -16,7 +16,9 @@ import { useAllMetrics } from './hooks/useAllMetrics'
 import { useCategoricalClasses } from './hooks/useCategoricalClasses'
 import { usePointSelection } from './hooks/usePointSelection'
 import { useCompare, type CompareUnit } from './hooks/useCompare'
-import { useAtlasMap } from './map/useAtlasMap'
+import { useIsCompact } from './hooks/useIsCompact'
+import { SheetHandle } from './components/SheetHandle'
+import { useAtlasMap, useMapBreakpoint } from './map/useAtlasMap'
 import { useChoroplethLayer } from './map/useChoroplethLayer'
 import { useCategoricalLayer } from './map/useCategoricalLayer'
 import { usePointLayer } from './map/usePointLayer'
@@ -39,6 +41,8 @@ export function App() {
   const { state, selectPillar, toggleLayer, selectMunicipio } = useAtlasState()
   const compare = useCompare()
   const [sobreOpen, setSobreOpen] = useState(false)
+  const compact = useIsCompact()
+  const [sheetOpen, setSheetOpen] = useState(false)
   const pillar = PILLARS.find((p) => p.id === state.pillar) ?? null
   const fillLayer = layerById(state.fillLayerId)
   const overlayLayer = layerById(state.overlayLayerId)
@@ -63,6 +67,7 @@ export function App() {
   const pointSelection = usePointSelection(mapRef, ready, Boolean(points))
   const onSelect = useCallback((cod: string | null) => selectMunicipio(cod), [selectMunicipio])
   const hover = useMunicipioInteraction(mapRef, ready, state.selectedCod, onSelect)
+  useMapBreakpoint(mapRef, ready, compact)
 
   const municipios = index.status === 'ready' ? index.data : null
   const mesos = useMemo(() => (municipios ? mesoList(municipios) : []), [municipios])
@@ -83,51 +88,80 @@ export function App() {
       provenance: manifest?.[layer!.id] ?? null,
     }))
 
-  return (
-    <main className="relative h-full w-full overflow-hidden bg-papel-fundo">
-      <MapCanvas containerRef={containerRef} />
-      {hover && hoverEntry && <HoverTooltip hover={hover} entry={hoverEntry} metric={metric} layer={choropleth} />}
-      <div className="absolute bottom-6 left-6 z-10 flex max-w-[calc(100%-420px)] items-end gap-4">
-        {selectedUnit && selectedEntry && (
-          <div className="w-80 shrink-0">
-            <MunicipioPanel
-              entry={selectedEntry}
-              summary={summary}
-              isCompared={compare.has(selectedUnit)}
-              compareFull={compare.isFull}
-              onToggleCompare={() => compare.toggle(selectedUnit)}
-              onClose={() => selectMunicipio(null)}
-            />
-          </div>
-        )}
-        {points && pointSelection.selected && (
-          <div className="w-80 shrink-0">
-            <PointDetail layer={points} properties={pointSelection.selected} onClose={pointSelection.clear} />
-          </div>
-        )}
-        {compare.units.length > 0 && allMetrics && municipios && (
-          <CompareTable
-            units={compare.units}
-            unitNames={compare.units.map((u) => unitName(u, municipios, mesos))}
-            loaded={allMetrics}
-            onRemove={compare.toggle}
-            onClear={compare.clear}
+  const activeLabels = [fillLayer?.label, overlayLayer?.label].filter(Boolean)
+  const sheetSummary = activeLabels.length ? activeLabels.join(' + ') : pillar ? `${pillar.label}: escolha uma camada` : 'Escolha um pilar'
+
+  const detailPanels = (
+    <>
+      {selectedUnit && selectedEntry && (
+        <div className={compact ? 'w-full' : 'w-80 shrink-0'}>
+          <MunicipioPanel
+            entry={selectedEntry}
+            summary={summary}
+            isCompared={compare.has(selectedUnit)}
+            compareFull={compare.isFull}
+            onToggleCompare={() => compare.toggle(selectedUnit)}
+            onClose={() => selectMunicipio(null)}
           />
+        </div>
+      )}
+      {points && pointSelection.selected && (
+        <div className={compact ? 'w-full' : 'w-80 shrink-0'}>
+          <PointDetail layer={points} properties={pointSelection.selected} onClose={pointSelection.clear} />
+        </div>
+      )}
+      {compare.units.length > 0 && allMetrics && municipios && (
+        <CompareTable
+          units={compare.units}
+          unitNames={compare.units.map((u) => unitName(u, municipios, mesos))}
+          loaded={allMetrics}
+          onRemove={compare.toggle}
+          onClear={compare.clear}
+        />
+      )}
+    </>
+  )
+
+  const sidebar = (
+    <Sidebar
+      pillar={pillar}
+      layers={pillarLayers}
+      activeIds={activeIds}
+      cards={cards}
+      mesos={mesos}
+      compare={compare}
+      onSelectPillar={selectPillar}
+      onToggleLayer={toggleLayer}
+      onOpenSobre={() => setSobreOpen(true)}
+      compact={compact}
+    />
+  )
+
+  return (
+    <main className={`relative h-full w-full overflow-hidden bg-papel-fundo ${compact ? 'flex flex-col' : ''}`}>
+      {/* Compact stacks the map above the sheet so the map box really shrinks; MapLibre
+          watches its container, so no padding or resize plumbing is needed. */}
+      <div className={compact ? 'relative min-h-0 flex-1' : 'absolute inset-0'}>
+        <MapCanvas containerRef={containerRef} />
+        {!compact && hover && hoverEntry && <HoverTooltip hover={hover} entry={hoverEntry} metric={metric} layer={choropleth} />}
+        {compact && (
+          <div className="pointer-events-none absolute inset-x-3 top-3 z-10 flex max-h-full flex-col gap-3 overflow-y-auto">
+            <div className="pointer-events-auto flex flex-col gap-3">{detailPanels}</div>
+          </div>
         )}
       </div>
-      <div className="absolute inset-y-0 right-0 z-10 w-[380px] border-l-[3px] border-tinta">
-        <Sidebar
-          pillar={pillar}
-          layers={pillarLayers}
-          activeIds={activeIds}
-          cards={cards}
-          mesos={mesos}
-          compare={compare}
-          onSelectPillar={selectPillar}
-          onToggleLayer={toggleLayer}
-          onOpenSobre={() => setSobreOpen(true)}
-        />
-      </div>
+
+      {!compact && <div className="absolute bottom-6 left-6 z-10 flex max-w-[calc(100%-420px)] items-end gap-4">{detailPanels}</div>}
+
+      {compact ? (
+        <div className="flex shrink-0 flex-col border-t-[3px] border-tinta bg-papel" style={{ maxHeight: sheetOpen ? '58vh' : undefined }}>
+          <SheetHandle open={sheetOpen} summary={sheetSummary} onToggle={() => setSheetOpen((v) => !v)} />
+          {sheetOpen && <div className="min-h-0 flex-1 overflow-y-auto">{sidebar}</div>}
+        </div>
+      ) : (
+        <div className="absolute inset-y-0 right-0 z-10 w-[380px] border-l-[3px] border-tinta">{sidebar}</div>
+      )}
+
       {sobreOpen && <Sobre onClose={() => setSobreOpen(false)} />}
     </main>
   )

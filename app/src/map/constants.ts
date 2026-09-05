@@ -7,6 +7,8 @@ export const PARAIBA_BOUNDS: LngLatBoundsLike = [
   [-34.7, -5.9],
 ]
 export const OPENING_CAMERA = { pitch: 48, bearing: -12 }
+/** A tall narrow screen loses too much height to a tilted view, so compact opens flatter. */
+export const COMPACT_CAMERA = { pitch: 22, bearing: 0 }
 
 export const SOURCES = { municipios: 'municipios', mesorregioes: 'mesorregioes', terrain: 'terrain', hillshadeDem: 'hillshade-dem', mask: 'mask', mesoLabels: 'meso-labels' } as const
 export const LAYERS = {

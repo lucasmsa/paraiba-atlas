@@ -331,7 +331,7 @@ export const LAYERS: AtlasLayer[] = [
     format: 'decimal',
     card: {
       oQueE: 'Mortes por agressão a cada 100 mil habitantes, contadas pelo registro de óbitos do Ministério da Saúde. Vem do atestado de óbito, não do boletim de ocorrência, então independe de a polícia ter registrado o caso.',
-      oQueMostra: 'Vem do atestado de óbito, então não depende de a polícia ter registrado o caso, que é a fragilidade das estatísticas criminais por município. Na Paraíba a violência letal não fica só na capital: cidades médias do interior aparecem em posições altas.',
+      oQueMostra: 'Na Paraíba a violência letal não fica só na capital: cidades médias do interior aparecem em posições altas, e vários municípios pequenos ficam em zero por anos seguidos.',
       comoLer: 'Cores mais escuras indicam taxa maior.',
     },
   },
