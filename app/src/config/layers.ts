@@ -28,6 +28,8 @@ export interface CategoricalLayer extends LayerBase {
   labels?: Record<string, string>
   colors?: Record<string, string>
   maxClasses?: number
+  /** Explicit legend order. Area order is right for most layers, wrong for a ranked scale. */
+  classOrder?: string[]
 }
 
 export interface PointLayer extends LayerBase {
@@ -576,6 +578,49 @@ export const LAYERS: AtlasLayer[] = [
       oQueE: 'A parcela dos domicílios do município cujos moradores são donos da casa, segundo o Censo de 2022.',
       oQueMostra: 'Casa própria em município pequeno raramente significa patrimônio: significa que não existe mercado de aluguel e que a casa foi construída ou herdada. É por isso que a camada não marca melhor e pior.',
       comoLer: 'Cores mais escuras indicam mais domicílios próprios. Os municípios com maior taxa são os menores do estado, não os mais ricos.',
+    },
+  },
+  {
+    kind: 'categorical',
+    id: 'terra.hipsometria',
+    pillar: 'terra',
+    label: 'Altitude',
+    geoPath: 'geo/terra/hipsometria.geojson',
+    classesPath: 'geo/terra/hipsometria_classes.json',
+    classesKey: 'faixa',
+    classField: 'faixa',
+    classOrder: ['0 a 100 m', '100 a 200 m', '200 a 300 m', '300 a 500 m', '500 a 700 m', '700 a 900 m', 'acima de 900 m'],
+    colors: {
+      '0 a 100 m': '#cfe0c4',
+      '100 a 200 m': '#e3e3b4',
+      '200 a 300 m': '#ecd9a0',
+      '300 a 500 m': '#e0bb84',
+      '500 a 700 m': '#cd9a6b',
+      '700 a 900 m': '#b0764e',
+      'acima de 900 m': '#8a5236',
+    },
+    card: {
+      oQueE: 'A altitude do terreno em faixas, extraída de um modelo digital de elevação com resolução de cerca de 76 metros. O ponto mais alto medido fica em 1.189 m, no Pico do Jabre, em Matureia.',
+      oQueMostra: 'É o degrau da Borborema visto de cima. Sessenta por cento do estado está entre 300 e 700 metros, o planalto que separa o litoral do Sertão e barra a umidade que vem do mar. A faixa abaixo de 100 metros é uma tira estreita no litoral, e acima de 900 metros sobra menos de 1% do território.',
+      comoLer: 'Verde é terra baixa, amarelo é meia altura, marrom é o alto. As faixas não têm o mesmo tamanho: são mais finas embaixo de 300 metros, onde fica a transição da Mata para o Agreste, e mais largas no topo, que ocupa pouca área.',
+    },
+  },
+  {
+    kind: 'lines',
+    id: 'terra.curvas_nivel',
+    pillar: 'terra',
+    label: 'Curvas de nível',
+    geoPath: 'geo/terra/curvas_nivel.geojson',
+    classField: 'indice',
+    styles: {
+      true: { color: '#5c3a10', width: 1.4, label: 'A cada 500 m' },
+      false: { color: '#8a6a3a', width: 0.6, label: 'A cada 100 m' },
+    },
+    fallback: { color: '#8a6a3a', width: 0.6 },
+    card: {
+      oQueE: 'Curvas de nível a cada 100 metros, traçadas do mesmo modelo de elevação. São 1.959 linhas, entre 100 e 1.100 metros.',
+      oQueMostra: 'Onde as curvas se apertam, o terreno sobe rápido: é assim que a escarpa da Borborema aparece no mapa. Onde elas se espalham, o relevo é manso, como nos tabuleiros do litoral e nas chapadas do Sertão.',
+      comoLer: 'Linha grossa a cada 500 metros, linha fina a cada 100. Sobreponha à geologia para ver que as serras acompanham as rochas mais resistentes.',
     },
   },
 ]

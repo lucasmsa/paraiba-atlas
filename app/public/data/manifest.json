@@ -304,7 +304,30 @@
       "year": 2022,
       "rows": 124,
       "path": "gente/bairros/domicilios_sem_morador.json"
+    },
+    "agua.clima": {
+      "source": "Open-Meteo Historical Weather API (ERA5), normais 2014-2023",
+      "source_url": "https://archive-api.open-meteo.com/v1/archive",
+      "year": 2023,
+      "rows": 191,
+      "path": "agua/clima.json"
+    },
+    "terra.hipsometria": {
+      "source": "AWS Terrain Tiles (terrarium), zoom 11, ~76 m/px",
+      "source_url": "https://s3.amazonaws.com/elevation-tiles-prod/terrarium/11/{x}/{y}.png",
+      "year": 2026,
+      "year_note": "O mosaico não declara ano; combina SRTM, ASTER e outras fontes. O ano é o da coleta.",
+      "rows": 217,
+      "path": "geo/terra/hipsometria.geojson"
+    },
+    "terra.curvas_nivel": {
+      "source": "AWS Terrain Tiles (terrarium), zoom 11, ~76 m/px",
+      "source_url": "https://s3.amazonaws.com/elevation-tiles-prod/terrarium/11/{x}/{y}.png",
+      "year": 2026,
+      "year_note": "Curvas geradas a cada 100 m a partir do modelo de elevação.",
+      "rows": 1959,
+      "path": "geo/terra/curvas_nivel.geojson"
     }
   },
-  "generated_at": "2026-09-05T02:27:12+00:00"
+  "generated_at": "2026-09-06T15:08:40+00:00"
 }

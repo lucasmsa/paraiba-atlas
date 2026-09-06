@@ -25,6 +25,7 @@ from .steps import (
     terra_mobilidade,
     terra_geossitios,
     terra_picos,
+    terra_relevo,
     terra_solos,
 )
 
@@ -36,6 +37,7 @@ STEPS = {
     "aquiferos": terra_aquiferos.run,
     "geossitios": terra_geossitios.run,
     "picos": terra_picos.run,
+    "relevo": terra_relevo.run,
     "mobilidade": terra_mobilidade.run,
     "escalada": terra_escalada.run,
     "acudes": agua_acudes.run,

@@ -1,5 +1,6 @@
-import { useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { Map as MapLibreMap, NavigationControl, setWorkerUrl } from 'maplibre-gl'
+import { RecenterControl } from './RecenterControl'
 import 'maplibre-gl/dist/maplibre-gl.css'
 // MapLibre resolves its worker through a runtime URL the bundler cannot see, so the
 // file is never emitted and the map silently fails to draw in a production build.
@@ -7,7 +8,7 @@ import 'maplibre-gl/dist/maplibre-gl.css'
 // which keeps them siblings so the worker's own relative import resolves.
 setWorkerUrl(`${import.meta.env.BASE_URL}maplibre/maplibre-gl-worker.mjs`)
 import { dataUrl } from '../data/contract'
-import { BASE_STYLE, COMPACT_CAMERA, HATCH_IMAGE, LAYERS, OPENING_CAMERA, PARAIBA_BOUNDS, SOURCES, TERRAIN_TILES } from './constants'
+import { BASE_STYLE, COMPACT_CAMERA, HATCH_IMAGE, LAYERS, MAX_ZOOM, MIN_ZOOM, OPENING_CAMERA, PAN_LIMIT, PARAIBA_BOUNDS, SOURCES, TERRAIN_TILES } from './constants'
 import { hatchImage } from './hatch'
 
 const TERRAIN_GRACE_MS = 6000
@@ -85,9 +86,13 @@ export function useAtlasMap() {
       bounds: PARAIBA_BOUNDS,
       fitBoundsOptions: { padding: fitPadding() },
       maxPitch: 70,
+      minZoom: MIN_ZOOM,
+      maxZoom: MAX_ZOOM,
+      maxBounds: PAN_LIMIT,
       attributionControl: { compact: true },
     })
     map.addControl(new NavigationControl({ visualizePitch: true }), 'top-right')
+    map.addControl(new RecenterControl(), 'top-right')
     map.on('load', () => {
       addAtlasSourcesAndLayers(map)
       enableTerrainWhenReady(map)
@@ -103,7 +108,11 @@ export function useAtlasMap() {
     }
   }, [])
 
-  return { containerRef, mapRef, ready }
+  const recenter = useCallback(() => {
+    mapRef.current?.fitBounds(PARAIBA_BOUNDS, { padding: fitPadding(), duration: 600 })
+  }, [])
+
+  return { containerRef, mapRef, ready, recenter }
 }
 
 /** Crossing the breakpoint invalidates both the fit and the opening tilt. */

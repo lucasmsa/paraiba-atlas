@@ -91,35 +91,51 @@ export function App() {
   const activeLabels = [fillLayer?.label, overlayLayer?.label].filter(Boolean)
   const sheetSummary = activeLabels.length ? activeLabels.join(' + ') : pillar ? `${pillar.label}: escolha uma camada` : 'Escolha um pilar'
 
-  const detailPanels = (
-    <>
-      {selectedUnit && selectedEntry && (
-        <div className={compact ? 'w-full' : 'w-80 shrink-0'}>
-          <MunicipioPanel
-            entry={selectedEntry}
-            summary={summary}
-            isCompared={compare.has(selectedUnit)}
-            compareFull={compare.isFull}
-            onToggleCompare={() => compare.toggle(selectedUnit)}
-            onClose={() => selectMunicipio(null)}
-          />
+  const openPanels = [
+    selectedUnit && selectedEntry ? (
+      <MunicipioPanel
+        key="municipio"
+        entry={selectedEntry}
+        summary={summary}
+        isCompared={compare.has(selectedUnit)}
+        compareFull={compare.isFull}
+        onToggleCompare={() => compare.toggle(selectedUnit)}
+        onClose={() => selectMunicipio(null)}
+      />
+    ) : null,
+    points && pointSelection.selected ? (
+      <PointDetail key="ponto" layer={points} properties={pointSelection.selected} onClose={pointSelection.clear} />
+    ) : null,
+    compare.units.length > 0 && allMetrics && municipios ? (
+      <CompareTable
+        key="comparar"
+        units={compare.units}
+        unitNames={compare.units.map((u) => unitName(u, municipios, mesos))}
+        loaded={allMetrics}
+        onRemove={compare.toggle}
+        onClear={compare.clear}
+      />
+    ) : null,
+  ].filter(Boolean)
+
+  /** One rail, stacked: panels share the height instead of covering each other. */
+  const panelRail = openPanels.length > 0 && (
+    <div
+      className={
+        compact
+          ? 'pointer-events-none absolute inset-x-3 bottom-3 top-3 z-20 flex flex-col justify-end gap-3'
+          : 'pointer-events-none absolute bottom-6 left-6 top-6 z-20 flex w-[380px] flex-col gap-4'
+      }
+    >
+      {openPanels.map((panel) => (
+        <div
+          key={(panel as { key: string }).key}
+          className={`pointer-events-auto flex min-h-0 flex-col ${compact ? 'max-h-[46%] shrink' : 'flex-1'}`}
+        >
+          {panel}
         </div>
-      )}
-      {points && pointSelection.selected && (
-        <div className={compact ? 'w-full' : 'w-80 shrink-0'}>
-          <PointDetail layer={points} properties={pointSelection.selected} onClose={pointSelection.clear} />
-        </div>
-      )}
-      {compare.units.length > 0 && allMetrics && municipios && (
-        <CompareTable
-          units={compare.units}
-          unitNames={compare.units.map((u) => unitName(u, municipios, mesos))}
-          loaded={allMetrics}
-          onRemove={compare.toggle}
-          onClear={compare.clear}
-        />
-      )}
-    </>
+      ))}
+    </div>
   )
 
   const sidebar = (
@@ -144,14 +160,8 @@ export function App() {
       <div className={compact ? 'relative min-h-0 flex-1' : 'absolute inset-0'}>
         <MapCanvas containerRef={containerRef} />
         {!compact && hover && hoverEntry && <HoverTooltip hover={hover} entry={hoverEntry} metric={metric} layer={choropleth} />}
-        {compact && (
-          <div className="pointer-events-none absolute inset-x-3 top-3 z-10 flex max-h-full flex-col gap-3 overflow-y-auto">
-            <div className="pointer-events-auto flex flex-col gap-3">{detailPanels}</div>
-          </div>
-        )}
+        {panelRail}
       </div>
-
-      {!compact && <div className="absolute bottom-6 left-6 z-10 flex max-w-[calc(100%-420px)] items-end gap-4">{detailPanels}</div>}
 
       {compact ? (
         <div className="flex shrink-0 flex-col border-t-[3px] border-tinta bg-papel" style={{ maxHeight: sheetOpen ? '58vh' : undefined }}>

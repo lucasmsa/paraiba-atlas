@@ -3,6 +3,7 @@ import type { CompareUnit } from '../hooks/useCompare'
 import { PILLARS } from '../config/pillars'
 import { cellTones, unitValue, type CellTone } from '../utils/compare'
 import { formatValue } from '../utils/format'
+import { Panel } from './Panel'
 
 interface Props {
   units: CompareUnit[]
@@ -20,24 +21,19 @@ const TONE_STYLE: Record<CellTone, string> = {
 
 export function CompareTable({ units, unitNames, loaded, onRemove, onClear }: Props) {
   return (
-    <section className="cordel-bloco cordel-sombra flex max-h-[min(60vh,calc(100vh-6rem))] w-full flex-col gap-3 p-4 md:max-h-[calc(100vh-6rem)] md:w-auto" aria-label="Comparação">
-      <header className="flex shrink-0 items-baseline justify-between gap-4">
-        <h2 className="cordel-titulo text-[20px] text-tinta">Comparar</h2>
-        <button
-          type="button"
-          onClick={onClear}
-          aria-label="Fechar comparação"
-          className="cursor-pointer px-2 text-xl leading-none text-tinta-fraca hover:text-tinta"
-        >
-          ×
-        </button>
-      </header>
+    <Panel
+      title="Comparar"
+      subtitle={`${units.length} de 6 selecionados`}
+      onClose={onClear}
+      closeLabel="Fechar comparação"
+      className="max-h-full w-full"
+    >
       {units.some((unit) => unit.kind === 'meso') && (
-        <p className="shrink-0 text-sm leading-snug text-tinta-fraca">
+        <p className="mb-2 text-sm leading-snug text-tinta-fraca">
           Nas mesorregiões, contagens são somadas e taxas e índices entram como média ponderada pela população de cada município.
         </p>
       )}
-      <div className="min-h-0 flex-1 overflow-auto">
+      <div className="overflow-x-auto">
         <table className="w-full border-collapse text-base">
           <thead className="sticky top-0 z-10 bg-papel">
             <tr>
@@ -77,6 +73,6 @@ export function CompareTable({ units, unitNames, loaded, onRemove, onClear }: Pr
           </tbody>
         </table>
       </div>
-    </section>
+    </Panel>
   )
 }

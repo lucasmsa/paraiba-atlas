@@ -6,6 +6,12 @@ export const OTHER_COLOR = '#b9b1a4'
 
 const ORDERED_PALETTE = ['#8a4b12', '#b5762a', '#d9a441', '#7d8a3c', '#3f7a6b', '#2f6f8f', '#6a5a94', '#93487a', '#a83b3b', '#5c4630', '#7a7f6b', '#c08a5e']
 
+export function orderEntries(all: ClassEntry[], order: string[] | undefined): ClassEntry[] {
+  if (!order) return all
+  const rank = new Map(order.map((value, index) => [value, index]))
+  return [...all].sort((a, b) => (rank.get(a.value) ?? 999) - (rank.get(b.value) ?? 999))
+}
+
 export function withOtherBucket(all: ClassEntry[], maxClasses: number | undefined): ClassEntry[] {
   if (!maxClasses || all.length <= maxClasses) return all
   const kept = all.slice(0, maxClasses)
