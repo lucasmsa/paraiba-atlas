@@ -128,7 +128,7 @@
       "year": 2026,
       "year_note": "Nenhuma das fontes declara ano de referência; o ano é o da coleta",
       "rows": 131,
-      "refreshed_at": "2026-09-04",
+      "refreshed_at": "2026-09-14",
       "with_volume": 117,
       "capacity_authority": "ANA/SAR onde há leitura, pois o SAR publica capacidade e volume na mesma linha; AESA/SEIRA preenche o resto",
       "volume_note": "Volume e histórico vêm do SAR da ANA, que não declara licença: citar a agência e a data de consulta. O SEIRA da AESA exige autenticação para volume, então dele vem só o cadastro."
@@ -329,5 +329,5 @@
       "path": "geo/terra/curvas_nivel.geojson"
     }
   },
-  "generated_at": "2026-09-06T15:08:40+00:00"
+  "generated_at": "2026-09-14T15:57:25+00:00"
 }
